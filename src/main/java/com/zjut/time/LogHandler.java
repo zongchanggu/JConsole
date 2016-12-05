@@ -11,10 +11,10 @@ public class LogHandler extends EventAdapter {
 
 	public void onClosed(Request request) throws Exception {
 		String log = new Date().toString() + " from " + request.getAddress().toString();
-		System.out.println(log);
+		logger.info(log);
 	}
 
 	public void onError(String error) {
-		System.out.println("Error: " + error);
+		logger.info("Error: " + error);
 	}
 }

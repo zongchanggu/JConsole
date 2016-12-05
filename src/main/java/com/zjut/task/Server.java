@@ -12,19 +12,21 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Server implements Runnable {
-	private static List<SelectionKey> wpool = new LinkedList<SelectionKey>(); 
+	private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();
 	private static Selector selector;
 	private ServerSocketChannel sschannel;
 	private InetSocketAddress address;
 	protected Notifier notifier;
 	private int port;
+	private volatile boolean stop = false;
 
 	private static int MAX_THREADS = 4;
-	
+
 	public static void main(String[] args) {
 		try {
 			System.out.println("server init....");
-			new Thread(new Server(8888)).start();;
+			new Thread(new Server(8888)).start();
+			;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +54,7 @@ public class Server implements Runnable {
 	public void run() {
 		System.out.println("Server started ...");
 		System.out.println("Server listening on port: " + port);
-		while (true) {
+		while (!stop) {
 			try {
 				int num = 0;
 				num = selector.select();
@@ -115,5 +117,9 @@ public class Server implements Runnable {
 			wpool.notifyAll();
 		}
 		selector.wakeup();
+	}
+
+	public void stopServer() {
+		this.stop = true;
 	}
 }

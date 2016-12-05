@@ -1,6 +1,9 @@
 package com.zjut.task;
 
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import java.util.LinkedList;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
@@ -8,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.io.IOException;
 
 public class Reader extends Thread {
+	private static Logger logger = Logger.getLogger(Reader.class);
 	private static List<Object> pool = new LinkedList<Object>();
 	private static Notifier notifier = Notifier.getNotifier();
 
@@ -57,8 +61,7 @@ public class Reader extends Thread {
 //		System.out.println(new String(req));
 		buffer.clear();
 		sc.read(buffer);
-		
-		System.out.println(new String(buffer.array()));
+		logger.info(new String(buffer.array(),"UTF-8"));
 		return buffer.array();
 	}
 

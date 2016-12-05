@@ -22,8 +22,6 @@ public class TimeHandler extends EventAdapter {
 			DateFormat enDate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.US);
 			time = enDate.format(date);
 		}
-//		if(new String(request.getDataInput()).equals("hello world"))
-			response.send("hello".getBytes());
-//		response.send(time.getBytes());
+		response.send("hello".getBytes());
 	}
 }

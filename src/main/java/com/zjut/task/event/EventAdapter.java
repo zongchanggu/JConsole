@@ -1,10 +1,14 @@
 package com.zjut.task.event;
 
 import com.zjut.task.event.ServerListener;
+
+import org.apache.log4j.Logger;
+
 import com.zjut.task.Request;
 import com.zjut.task.Response;
 
 public abstract class EventAdapter implements ServerListener {
+	protected static Logger logger = Logger.getLogger(EventAdapter.class);
 	public EventAdapter() {
 	}
 
