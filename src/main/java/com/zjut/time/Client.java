@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.io.*;
 
 public class Client {
+	
 	public Client() {
 	}
 
