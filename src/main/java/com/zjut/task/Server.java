@@ -11,7 +11,17 @@ import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Server implements Runnable {
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+
+@Component("processor")
+public class Server extends HttpServlet {
+
+	private static final long serialVersionUID = -3079101309407279945L;
+	private Logger logger = Logger.getLogger(Server.class);
 	private static List<SelectionKey> wpool = new LinkedList<SelectionKey>();
 	private static Selector selector;
 	private ServerSocketChannel sschannel;
@@ -22,38 +32,56 @@ public class Server implements Runnable {
 
 	private static int MAX_THREADS = 4;
 
-	public static void main(String[] args) {
-		try {
-			System.out.println("server init....");
-			new Thread(new Server(8888)).start();
-			;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public Server() {
 
-	public Server(int port) throws Exception {
-		this.port = port;
-		notifier = Notifier.getNotifier();
-		for (int i = 0; i < MAX_THREADS; i++) {
-			Thread r = new Reader();
-			Thread w = new Writer();
-			r.start();
-			w.start();
-		}
-		selector = Selector.open();
-		sschannel = ServerSocketChannel.open();
-		sschannel.configureBlocking(false);
-		address = new InetSocketAddress(port);
-		ServerSocket ss = sschannel.socket();
-		ss.bind(address);
-		sschannel.register(selector, SelectionKey.OP_ACCEPT);
 	}
 
 	@Override
-	public void run() {
-		System.out.println("Server started ...");
-		System.out.println("Server listening on port: " + port);
+	public void init() throws ServletException {
+		super.init();
+		Runnable task = new Runnable() {
+			@Override
+			public void run() {
+				new Server(8888).runTask();
+			}
+		};
+		new Thread(task).start();
+	}
+
+	public Server(int port) {
+		try {
+			this.port = port;
+			LogHandler loger = new LogHandler();
+			TimeHandler timer = new TimeHandler();
+			ServerHandler serverHandler = new ServerHandler();
+			notifier = Notifier.getNotifier();
+			notifier.addListener(loger);
+			notifier.addListener(timer);
+			notifier.addListener(serverHandler);
+			notifier = Notifier.getNotifier();
+			logger.info("Server starting ...");
+			for (int i = 0; i < MAX_THREADS; i++) {
+				Thread r = new Reader();
+				Thread w = new Writer();
+				r.start();
+				w.start();
+			}
+			selector = Selector.open();
+			sschannel = ServerSocketChannel.open();
+			sschannel.configureBlocking(false);
+			address = new InetSocketAddress(port);
+			ServerSocket ss = sschannel.socket();
+			ss.bind(address);
+			sschannel.register(selector, SelectionKey.OP_ACCEPT);
+			logger.info("server init success...");
+		} catch (Exception e) {
+			logger.info("server init failed...");
+		}
+	}
+
+	public void runTask() {
+		logger.info("Server started ...");
+		logger.info("Server listening on port: " + this.port);
 		while (!stop) {
 			try {
 				int num = 0;

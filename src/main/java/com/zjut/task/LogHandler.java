@@ -1,8 +1,7 @@
-package com.zjut.time;
+package com.zjut.task;
 
 import java.util.Date;
 
-import com.zjut.task.Request;
 import com.zjut.task.event.EventAdapter;
 
 public class LogHandler extends EventAdapter {
