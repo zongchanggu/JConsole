@@ -1,23 +1,13 @@
 package com.zjut.task;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
-import com.zjut.pojo.ReqInfo;
-import com.zjut.util.MarshallingCodecFactory;
-
-import io.netty.handler.codec.marshalling.MarshallingDecoder;
-
-import java.util.LinkedList;
-import java.nio.channels.SocketChannel;
-import java.nio.channels.SelectionKey;
-import java.nio.ByteBuffer;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class Reader extends Thread {
 	private static Logger logger = Logger.getLogger(Reader.class);
@@ -71,6 +61,7 @@ public class Reader extends Thread {
 		buffer.clear();
 		sc.read(buffer);
 		byte[] bytes = buffer.array();
+		System.out.println(new String(bytes,"ISO-8859-1"));
 	//	MarshallingDecoder decoder = MarshallingCodecFactory.getMarshallingDecoder();
 //		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //		ObjectOutputStream oos = new ObjectOutputStream(baos);
