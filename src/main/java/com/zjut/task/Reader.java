@@ -4,11 +4,20 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.zjut.pojo.ReqInfo;
+import com.zjut.util.MarshallingCodecFactory;
+
+import io.netty.handler.codec.marshalling.MarshallingDecoder;
+
 import java.util.LinkedList;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.ByteBuffer;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Reader extends Thread {
 	private static Logger logger = Logger.getLogger(Reader.class);
@@ -61,10 +70,35 @@ public class Reader extends Thread {
 //		System.out.println(new String(req));
 		buffer.clear();
 		sc.read(buffer);
-		logger.info(new String(buffer.array(),"UTF-8"));
+		byte[] bytes = buffer.array();
+	//	MarshallingDecoder decoder = MarshallingCodecFactory.getMarshallingDecoder();
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//		ObjectOutputStream oos = new ObjectOutputStream(baos);
+//		oos.writeObject(new String(bytes,"ISO-8859-1"));
+//		byte[] readByte = baos.toByteArray();
+//		System.out.println(new String(readByte,"utf-8"));
+//		ByteArrayInputStream bais = new ByteArrayInputStream(readByte);
+//		ObjectInputStream ois = new ObjectInputStream(bais);
+//		ReqInfo ft = new ReqInfo();
+//		try {
+//			ft = (ReqInfo) ois.readObject();
+//		} catch (ClassNotFoundException e) {
+//			logger.info("format convert error....");
+//		}
+//		logger.info(ft.toString());
 		return buffer.array();
 	}
 
+    public static String asciiToString(String value)  
+    {  
+        StringBuffer sbu = new StringBuffer();  
+        String[] chars = value.split(",");  
+        for (int i = 0; i < chars.length; i++) {  
+            sbu.append((char) Integer.parseInt(chars[i]));
+        }  
+        return sbu.toString();  
+    }  
+    
 	public void read(SelectionKey key) {
 		try {
 			SocketChannel sc = (SocketChannel) key.channel();

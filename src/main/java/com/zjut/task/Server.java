@@ -2,6 +2,7 @@ package com.zjut.task;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.channels.ServerSocketChannel;
@@ -76,6 +77,15 @@ public class Server extends HttpServlet {
 			logger.info("server init success...");
 		} catch (Exception e) {
 			logger.info("server init failed...");
+		} finally {
+			logger.info("server closed ....");
+			try {
+				if (sschannel != null)
+					sschannel.close();
+			} catch (IOException e) {
+				logger.info("server close failed...");
+			}
+			sschannel = null;
 		}
 	}
 
