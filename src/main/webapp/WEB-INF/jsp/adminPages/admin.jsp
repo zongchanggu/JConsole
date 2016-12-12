@@ -20,7 +20,7 @@
 		<div class="logo margin-big-left fadein-top">
 			<h1 style="font-size: 20px;">
 				<img src="${pageContext.request.contextPath}/images/admin/user_pic.jpg" class="radius-circle rotate-hover"
-					height="50" alt="" />浙工大广告传媒管理平台
+					height="50" alt="" />控制台
 			</h1>
 		</div>
 		<div class="head-l">
@@ -37,11 +37,11 @@
 			<span class="icon-list"></span>菜&nbsp;单&nbsp;列&nbsp;表
 		</div>
 		<h2>
-			<span class="icon-user"></span>个人设置
+			<span class="icon-user"></span>用户管理
 		</h2>
 		<ul style="display: block">
 			<li><a href="user_info.action" target="right"><span
-					class="icon-caret-right"></span>个人信息</a></li>
+					class="icon-caret-right"></span>用户信息</a></li>
 			<li><a href="alter_pass.action" target="right"><span
 					class="icon-caret-right"></span>修改密码</a></li>
 			<li><a href="website_info.jsp" target="right"><span
