@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.LinkedList;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.SelectionKey;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public final class Writer extends Thread {
 	private static List<Object> pool = new LinkedList<Object>();
 	private static Notifier notifier = Notifier.getNotifier();

@@ -10,7 +10,13 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Date;
 import java.util.Set;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class TestClientTask { 
 	private static ByteBuffer sBuffer = ByteBuffer.allocate(1024);  
 /*接受数据缓冲区*/  

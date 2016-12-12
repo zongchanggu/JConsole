@@ -1,5 +1,11 @@
 package com.zjut.pojo;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class User {
 	
 	private int id;

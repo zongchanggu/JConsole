@@ -2,7 +2,13 @@ package com.zjut.time;
 
 import java.net.Socket;
 import java.io.*;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class Client {
 	
 	public Client() {

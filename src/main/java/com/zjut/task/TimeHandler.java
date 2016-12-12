@@ -4,7 +4,13 @@ import java.util.*;
 
 import com.zjut.task.event.EventAdapter;
 import java.text.DateFormat;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class TimeHandler extends EventAdapter {
 	public TimeHandler() {
 	}
