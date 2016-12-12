@@ -305,7 +305,7 @@ textarea.input{height:auto;}
 .field-icon-right .icon{position:absolute;right:0;top:0;width:34px;height:34px;text-align:center;line-height:34px;font-size:16px;font-weight:normal;}
 .form-x .form-group:after, .form-inline:after{clear:both;content:" ";display:block;height:0;overflow:hidden;visibility:hidden;}
 @media (min-width:760px){
-.form-x .form-group .label{float:left;width:15%;text-align:right;padding:7px 7px 7px 0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.form-x .form-group .label{float:left;width:12%;text-align:right;padding:7px 7px 7px 0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
 .form-x .form-group .field{float:left;width:85%;}
 .form-x .form-button{margin-left:15%;}
 }
