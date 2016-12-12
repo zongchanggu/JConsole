@@ -2,7 +2,6 @@ package com.zjut.task;
 
 import java.util.List;
 import java.util.LinkedList;
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.channels.ServerSocketChannel;
@@ -17,8 +16,13 @@ import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-
-@Component("processor")
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class Server extends HttpServlet {
 
 	private static final long serialVersionUID = -3079101309407279945L;
@@ -77,15 +81,6 @@ public class Server extends HttpServlet {
 			logger.info("server init success...");
 		} catch (Exception e) {
 			logger.info("server init failed...");
-		} finally {
-			logger.info("server closed ....");
-			try {
-				if (sschannel != null)
-					sschannel.close();
-			} catch (IOException e) {
-				logger.info("server close failed...");
-			}
-			sschannel = null;
 		}
 	}
 

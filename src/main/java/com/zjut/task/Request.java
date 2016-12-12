@@ -2,7 +2,13 @@ package com.zjut.task;
 
 import java.net.InetAddress;
 import java.nio.channels.SocketChannel;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class Request {
 	private SocketChannel sc;
 	private byte[] dataInput = null;;

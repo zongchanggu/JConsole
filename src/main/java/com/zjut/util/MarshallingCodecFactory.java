@@ -1,6 +1,8 @@
 package com.zjut.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jboss.marshalling.ByteInput;
 import org.jboss.marshalling.MarshallerFactory;
@@ -9,6 +11,9 @@ import org.jboss.marshalling.MarshallingConfiguration;
 import org.jboss.marshalling.Unmarshaller;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.ByteToMessageCodec;
+import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.marshalling.DefaultMarshallerProvider;
 import io.netty.handler.codec.marshalling.DefaultUnmarshallerProvider;
 import io.netty.handler.codec.marshalling.MarshallerProvider;
@@ -18,16 +23,9 @@ import io.netty.handler.codec.marshalling.UnmarshallerProvider;
 
 /**
  * 
- * <p>
- * 
- * @author:zongchnaggu
- *                     </p>
- *                     <p>
- * @description:created by gu
- *                      </p>
- *                      <p>
- * @date:2016年12月7日
- *                  </p>
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月7日</p>
  *
  */
 public class MarshallingCodecFactory {
@@ -60,6 +58,7 @@ public class MarshallingCodecFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	//	ByteInput input = new ChannelBufferByteInput(bytes.getBytes());
-		}
+		// ByteInput input = new ChannelBufferByteInput(bytes.getBytes());
+		byte[] bt = bytes.getBytes();
+	}
 }

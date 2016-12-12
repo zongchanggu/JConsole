@@ -8,7 +8,13 @@ import java.net.UnknownHostException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 @Controller
 @RequestMapping("testCon")
 public class TestCon {

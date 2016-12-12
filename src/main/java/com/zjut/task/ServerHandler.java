@@ -1,7 +1,13 @@
 package com.zjut.task;
 
 import com.zjut.task.event.EventAdapter;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class ServerHandler extends EventAdapter {
 	public ServerHandler() {
 	}

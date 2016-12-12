@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zjut.pojo.User;
 import com.zjut.service.IUserService;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 @Controller
 @RequestMapping("userAction")
 public class UserAction {

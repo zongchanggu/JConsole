@@ -7,7 +7,13 @@ import com.zjut.task.Notifier;
 import com.zjut.task.Server;
 import com.zjut.task.ServerHandler;
 import com.zjut.task.TimeHandler;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月11日</p>
+ *
+ */
 public class Start {
 	private static Logger logger = Logger.getLogger(Start.class);
 
