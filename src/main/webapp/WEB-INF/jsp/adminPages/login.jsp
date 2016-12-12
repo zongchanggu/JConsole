@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, no-store">
 <meta http-equiv="Expires" content="0">
 <title>后台登录</title>
 <link href="${pageContext.request.contextPath}/css/login.css" type="text/css" rel="stylesheet">
