@@ -1,6 +1,6 @@
 body{ color:#333; font-size:13px;}
 input,select,textarea{color:#333;}
-.bg{ width:100%; height:100%; position:absolute; background:url(../images/bg.jpg) }
+.bg{ width:100%; height:100%; position:absolute; background:url(../images/admin/bg.jpg) }
 .panel{background:#fff;}
 form .form-group:last-child{padding-bottom:0;}
 .passcode{position:absolute;right:0;bottom:0;height:32px;margin:1px;border-left:solid 1px #ddd;text-align:center;line-height:32px;border-radius:0 4px 4px 0;}
@@ -12,14 +12,14 @@ ul,li{ list-style-type:none;}
 .field-icon-right .icon{ bottom:0px; top:auto}
 .logo{ float:left; color:#FFF; margin-top:10px; line-height:45px;}
 .logo img{ float:left; margin-right:10px;}
-.loginbox { background:url(../images/tmbg-white.png); border:0px;}
+.loginbox { background:url(../images/admin/tmbg-white.png); border:0px;}
 /********头部******/
-.header{height:70px; overflow:hidden; background:url(../images/bg.jpg) no-repeat 0 -1000px; }
+.header{height:70px; overflow:hidden; background:url(../images/admin/bg.jpg) no-repeat 0 -1000px; }
 .head-l{ float:right; margin-top:17px; margin-right:15px; }
 .head-l .button{ padding:8px 15px;}
 .head-l .bg-blue:hover{ background-color:#03b6fd;}
 .leftnav{width:170px; height:100%; position:fixed; top:70px; left:0px;}
-.leftnav-title { height:50px; background:url(../images/bg.jpg) no-repeat 0 -1000px;  color:#FFF; padding-left:22px;  font-size:15px; line-height:50px;}
+.leftnav-title { height:50px; background:url(../images/admin/bg.jpg) no-repeat 0 -1000px;  color:#FFF; padding-left:22px;  font-size:15px; line-height:50px;}
 .leftnav-title span{ margin-right:10px;}
 .leftnav h2{ padding:10px 0 10px 22px; transition:all .1s ease-in-out; display:block; cursor:pointer; font-weight:bold; font-size:14px; border-top:1px solid #b5cfd9;}
 .leftnav h2.on{ color:#09c;}
@@ -37,7 +37,7 @@ ul,li{ list-style-type:none;}
 .content{width:100%;}
 .body-content{padding:20px 0; overflow:hidden;}
 .content .title{ border-bottom:1px solid #dfdfdf; line-height:35px; font-size:14px; font-weight:bold; color:#09c}
-.form-x .form-group .label{ width:10%;}
+.form-x .form-group .label{ width:12%;}
 .form-x .form-button { margin-left:10%;}
 .w50 { width:25%; float:left;}
 .form-x .tipss{ float:left; padding-left:10px; color:#888; line-height:42px;}
@@ -72,7 +72,40 @@ input[type="checkbox"], input[type="radio"]{ width:15px; height:15px; vertical-a
 
 textarea[name=content]{width:100%; height:500px; border:1px solid #ddd; border-radius:3px; -webkit-border-radius:3px;}
 
+/***me***/
+.welcome-info{
+	overflow: hidden;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 8px;
+}
 
+.welcome-info span {
+    padding-left: 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
 
+.seperate-line{
+	width: 100%;
+    height: 0;
+    border-bottom: 1px solid #DFE9EE;
+    margin-bottom: 16px;
+}
 
+.basic-info {
+    padding-left: 35px;
+}
+
+.basic-info td {
+    width: 300px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.basic-info td span {
+    font-weight: normal;
+}
 
