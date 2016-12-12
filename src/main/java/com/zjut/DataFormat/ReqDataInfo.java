@@ -2,7 +2,13 @@
 // source: test.proto
 
 package com.zjut.DataFormat;
-
+/**
+ * 
+ * <p>@author:zongchnaggu</p>
+ * <p>@description:created by gu</p>
+ * <p>@date:2016年12月12日</p>
+ *
+ */
 public final class ReqDataInfo {
   private ReqDataInfo() {}
   public static void registerAllExtensions(
