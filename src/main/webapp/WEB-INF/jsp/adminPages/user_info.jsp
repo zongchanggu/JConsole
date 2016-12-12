@@ -24,7 +24,7 @@
 		<div class="body-content" style="margin: 0px 10px;">
 			<div class="welcome-info">
 				<img src="${pageContext.request.contextPath}/images/admin/sun.png">
-				<span>您好：${sessionScope.username}，欢迎使用浙工大传媒管理平台</span>
+				<span>您好：${sessionScope.username}，欢迎使用管理控制台</span>
 			</div>
 
 			<div class="welcome-info">
