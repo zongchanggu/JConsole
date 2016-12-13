@@ -24,21 +24,14 @@ import io.netty.handler.codec.string.StringDecoder;
 
 /**
  * 
- * <p>
  * @author:zongchnaggu
- * </p>
- * <p>
  * @description:created by gu
- * </p>
- * <p>
- * @date:2016年12月11日
- * </p>
- *
+ * @date:2016年12月13日 下午7:35:04
  */
 public class NettyServerThread implements Runnable {
 	private static Logger logger = Logger.getLogger(NettyServerThread.class);
-	public static ConcurrentHashMap<Integer,AtomicInteger> Adcounts = new ConcurrentHashMap<>();
-	public static ConcurrentHashMap<Integer,AtomicInteger> Devcounts = new ConcurrentHashMap<>();
+	public static ConcurrentHashMap<Integer, AtomicInteger> Adcounts = new ConcurrentHashMap<>();
+	public static ConcurrentHashMap<Integer, AtomicInteger> Devcounts = new ConcurrentHashMap<>();
 	private int port = 2222;
 	private volatile boolean stop = false;
 

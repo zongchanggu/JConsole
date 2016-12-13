@@ -28,7 +28,7 @@ import io.netty.handler.codec.marshalling.UnmarshallerProvider;
  * <p>@date:2016年12月7日</p>
  *
  */
-public class MarshallingCodecFactory {
+public class MarshallingCodecUtil {
 
 	public static MarshallingDecoder getNettyMarshallingDecoder() {
 		final MarshallerFactory fac = Marshalling.getProvidedMarshallerFactory("serial");
