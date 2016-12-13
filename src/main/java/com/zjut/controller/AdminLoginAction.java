@@ -52,7 +52,7 @@ public class AdminLoginAction {
 				try {
 					PrintWriter out = response.getWriter();
 					
-					out.print("<script language=\"javascript\">alert('对不起您无权访问，请先登录！');window.location.href='/JConsoleGroup/adminAction/loginPage.action'</script>");
+					out.print("<script language=\"javascript\">alert('对不起您无权访问，请先登录！');parent.location.href='/JConsoleGroup/adminAction/loginPage.action'</script>");
 					return null;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
