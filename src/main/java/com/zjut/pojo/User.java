@@ -4,16 +4,9 @@ import java.util.Date;
 
 /**
  * 
- * <p>
  * @author:zongchnaggu
- * </p>
- * <p>
  * @description:created by gu
- * </p>
- * <p>
- * @date:2016年12月11日
- * </p>
- *
+ * @date:2016年12月13日 下午11:09:54
  */
 public class User {
 

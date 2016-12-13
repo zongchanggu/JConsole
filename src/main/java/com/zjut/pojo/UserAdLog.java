@@ -1,7 +1,12 @@
 package com.zjut.pojo;
 
 import java.util.Date;
-
+/**
+ * 
+ * @author:zongchnaggu
+ * @description:created by gu
+ * @date:2016年12月13日 下午11:10:10
+ */
 public class UserAdLog {
 
 	private int ID;
