@@ -1,7 +1,12 @@
 package com.zjut.pojo;
 
 import java.util.Date;
-
+/**
+ * 
+ * @author:zongchnaggu
+ * @description:created by gu
+ * @date:2016年12月13日 下午10:46:59
+ */
 public class Device {
 	private int ID;
 	private int DevID;

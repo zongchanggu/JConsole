@@ -34,7 +34,6 @@ public class DevServiceImpl implements DevService {
 
 	@Override
 	public List<Advertise> getAdByDevID(int dev_id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

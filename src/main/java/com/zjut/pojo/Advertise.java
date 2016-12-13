@@ -3,7 +3,6 @@ package com.zjut.pojo;
 import java.util.Date;
 
 public class Advertise {
-
 	private int ID;
 	private int AdID;
 	private int DevID;
