@@ -38,6 +38,7 @@ public class DevServiceImpl implements DevService {
 
 	@Override
 	public List<Advertise> getAdByDevID(int dev_id) {
+		
 		return null;
 	}
 
