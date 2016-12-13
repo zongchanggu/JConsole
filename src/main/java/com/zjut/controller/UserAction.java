@@ -23,7 +23,6 @@ public class UserAction {
 	@RequestMapping("getUser")
 	public String getUser(){
 		User user= userServiceImpl.getUserById(1);
-		System.out.println(user.getUser_name()+":"+user.getPassword());
 		return "index";
 	}
 

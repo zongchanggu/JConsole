@@ -24,6 +24,5 @@ public class MybatisTest {
 	}
 	public void test(){
 		User user = userService.getUserById(1);
-		System.out.println(user.getId()+":"+user.getUser_name()+":"+user.getPassword()+":"+user.getAge());
 	}
 }

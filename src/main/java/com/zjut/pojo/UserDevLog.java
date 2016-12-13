@@ -2,27 +2,14 @@ package com.zjut.pojo;
 
 import java.util.Date;
 
-/**
- * 
- * <p>
- * @author:zongchnaggu
- * </p>
- * <p>
- * @description:created by gu
- * </p>
- * <p>
- * @date:2016年12月11日
- * </p>
- *
- */
-public class User {
+public class UserDevLog {
 
 	private int ID;
 	private int UserID;
-	private String Phone;
 	private String UserName;
-	private String PassWord;
-	private int Type;
+	private int DevID;
+	private String DevName;
+	private String Operation;
 	private Date CurrentTime;
 
 	public int getID() {
@@ -41,14 +28,6 @@ public class User {
 		UserID = userID;
 	}
 
-	public String getPhone() {
-		return Phone;
-	}
-
-	public void setPhone(String phone) {
-		Phone = phone;
-	}
-
 	public String getUserName() {
 		return UserName;
 	}
@@ -57,20 +36,28 @@ public class User {
 		UserName = userName;
 	}
 
-	public String getPassWord() {
-		return PassWord;
+	public int getDevID() {
+		return DevID;
 	}
 
-	public void setPassWord(String passWord) {
-		PassWord = passWord;
+	public void setDevID(int devID) {
+		DevID = devID;
 	}
 
-	public int getType() {
-		return Type;
+	public String getDevName() {
+		return DevName;
 	}
 
-	public void setType(int type) {
-		Type = type;
+	public void setDevName(String devName) {
+		DevName = devName;
+	}
+
+	public String getOperation() {
+		return Operation;
+	}
+
+	public void setOperation(String operation) {
+		Operation = operation;
 	}
 
 	public Date getCurrentTime() {
