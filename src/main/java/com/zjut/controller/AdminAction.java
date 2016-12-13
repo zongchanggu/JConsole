@@ -33,5 +33,15 @@ public class AdminAction {
 		String viewName = "/adminPages/alter_pass";
 		return viewName;
 	}
+	
+	/**
+	 * 获取用户列表
+	 * @return
+	 */
+	@RequestMapping(value = "user_list")
+	public String user_list(){
+		String viewName = "/adminPages/user_list";
+		return viewName;
+	}
 
 }

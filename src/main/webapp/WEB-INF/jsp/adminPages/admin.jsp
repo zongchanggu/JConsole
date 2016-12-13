@@ -41,9 +41,11 @@
 		</h2>
 		<ul style="display: block">
 			<li><a href="user_info.action" target="right"><span
-					class="icon-caret-right"></span>用户信息</a></li>
+					class="icon-caret-right"></span>个人信息</a></li>
 			<li><a href="alter_pass.action" target="right"><span
 					class="icon-caret-right"></span>修改密码</a></li>
+			<li><a href="user_list.action" target="right"><span
+					class="icon-caret-right"></span>用户列表</a></li>
 			<li><a href="website_info.jsp" target="right"><span
 					class="icon-caret-right"></span>网站设置</a></li>
 		</ul>

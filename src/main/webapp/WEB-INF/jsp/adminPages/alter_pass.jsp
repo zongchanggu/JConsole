@@ -15,7 +15,7 @@
 <body>
 <div class="panel admin-panel">
 		<div class="panel-head">
-			<strong><span class="icon-key"></span> 修改密码</strong>
+			<strong><span class="icon-key"></span>&nbsp;&nbsp;修改密码</strong>
 		</div>
 		<div class="body-content">
 			<form method="post" class="form-x" action="">
