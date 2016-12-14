@@ -7,8 +7,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <title>后台管理中心</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pintuer.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/pintuer.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/admin.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/font-awesome-4.7.0/css/font-awesome.min.css">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
@@ -19,13 +21,14 @@
 	<div class="header bg-main">
 		<div class="logo margin-big-left fadein-top">
 			<h1 style="font-size: 20px;">
-				<img src="${pageContext.request.contextPath}/images/admin/user_pic.jpg" class="radius-circle rotate-hover"
-					height="50" alt="" />控制台
+				<img
+					src="${pageContext.request.contextPath}/images/admin/user_pic.jpg"
+					class="radius-circle rotate-hover" height="50" alt="" />控制台
 			</h1>
 		</div>
 		<div class="head-l">
-			<a class="button button-little bg-green" href="user_info.action" target="right"><span
-				class="icon-home"></span> 首页</a>&nbsp;&nbsp; <a
+			<a class="button button-little bg-green" href="user_info.action"
+				target="right"><span class="icon-home"></span> 首页</a>&nbsp;&nbsp; <a
 				class="button button-little bg-red" href="logout.action"><span
 				class="icon-power-off"></span> 退出登录</a>
 		</div>
@@ -53,8 +56,9 @@
 			<span class="icon-pencil-square-o"></span>广告管理
 		</h2>
 		<ul>
-			<li><a href="adslist.jsp" target="right"><span
-					class="icon-caret-right"></span>广告管理</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/AdsManage/getList.action"
+				target="right"><span class="icon-caret-right"></span>广告列表</a></li>
 
 			<li><a href="cate.jsp" target="right"><span
 					class="icon-caret-right"></span>分类管理</a></li>
@@ -88,13 +92,13 @@
 		<li><a href="user_info.action" target="right" class="icon-home">
 				首页</a></li>
 		<li><a href="##" id="a_leader_txt">个人信息</a></li>
-		<li><b>当前语言：</b><span style="color: red;">中文</php></span></li>
+		<li><b>当前语言：</b><span style="color: red;">中文</span></li>
 	</ul>
 
 	<!-- 主内容显示区 -->
 	<div class="admin">
-		<iframe scrolling="auto" rameborder="0" src="user_info.action" name="right"
-			width="100%" height="100%"></iframe>
+		<iframe scrolling="auto" rameborder="0" src="user_info.action"
+			name="right" width="100%" height="100%"></iframe>
 	</div>
 
 </body>

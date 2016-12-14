@@ -7,23 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <title>注册用户管理</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/easyui/themes/gray/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/easyui/themes/icon.css">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"
-	charset="utf-8"></script>
+<jsp:include page="../common.jsp" />
 <script type="text/javascript">
 	function doSearch() {
 		$('#userlist_tab').datagrid('load', {
@@ -32,58 +16,6 @@
 		});
 	}
 </script>
-<style type="text/css">
-iframe {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 14px;
-	font: inherit;
-	vertical-align: baseline;
-}
-
-body {
-	font-size: 14px;
-	height: 100%;
-	color: #333;
-	bottom: 0px;
-	background: #fff;
-	font-family: "Microsoft YaHei", "simsun", "Helvetica Neue", Arial,
-		Helvetica, sans-serif;
-	margin: 0px;
-	background: #fff;
-}
-
-html {
-	height: 100%;
-}
-
-* {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-.mypanel {
-	background: #fff;
-	height: 100%;
-}
-
-.admin-panel {
-	
-}
-
-.panel-head {
-	background-color: #fafafa;
-	padding: 10px 15px;
-	border-radius: 4px 4px 0 0;
-	border-left: solid 1px #ddd;
-	border-right: solid 1px #ddd;
-	border-top: solid 1px #ddd;
-}
-</style>
-
-
 </head>
 <body>
 	<div class="mypanel admin-panel">
@@ -114,10 +46,7 @@ html {
 				style="width: 15%; display: inline-block;">&nbsp;&nbsp; <a
 				class="btn btn-sm btn-default" href="#" role="button"
 				onclick="doSearch()" style="vertical-align: inherit;">搜&nbsp;索</a>
-				
-				
 		</div>
-
 	</div>
 </body>
 </html>
