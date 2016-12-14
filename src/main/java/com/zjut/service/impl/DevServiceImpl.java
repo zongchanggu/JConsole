@@ -2,9 +2,15 @@ package com.zjut.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+import com.zjut.mapping.DevMapper;
 import com.zjut.pojo.Advertise;
 import com.zjut.pojo.Device;
 import com.zjut.service.DevService;
+
 /**
  * 
  * @author:zongchnaggu
@@ -12,6 +18,8 @@ import com.zjut.service.DevService;
  * @date:2016年12月13日 下午11:10:28
  */
 public class DevServiceImpl implements DevService {
+	@Resource
+	private SqlSessionTemplate sessionTemplate;
 
 	@Override
 	public Device getDevInfoByKey(int dev_id) {
@@ -38,8 +46,8 @@ public class DevServiceImpl implements DevService {
 
 	@Override
 	public List<Advertise> getAdByDevID(int dev_id) {
-		
-		return null;
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		return devMapper.getAdByDevID(dev_id);
 	}
 
 }
