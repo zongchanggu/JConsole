@@ -22,6 +22,11 @@
 	<select id="getAdByDevID" resultMap="com.zjut.mapping.AdMapper.AdResultMap"
 		parameterType="java.lang.Integer">
 		select * from advertise where AdID in
-		(select AdID from device where DevId = #{dev_id})
+		(select AdID from
+		device where DevId = #{dev_id})
+	</select>
+
+	<select id="getDevIds" resultType="java.lang.Integer">
+		select DevID from device
 	</select>
 </mapper>

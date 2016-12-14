@@ -8,18 +8,30 @@ import com.zjut.pojo.Advertise;
 import com.zjut.service.DevService;
 
 /**
- * <p>@author:zongchnaggu</p>
- * <p>@description:created by gu</p>
- * <p>@date:2016年12月13日</p>
+ * <p>
+ * @author:zongchnaggu
+ * </p>
+ * <p>
+ * @description:created by gu
+ * </p>
+ * <p>
+ * @date:2016年12月13日
+ * </p>
  */
 @Controller
 @RequestMapping("devCheck")
 public class DevCheck {
 	@Resource
 	private DevService devServiceImpl;
-	
+
 	@RequestMapping("doHealthCheck")
-	public String doHealthCheck(int dev_id){
+	public String doHealthCheck() {
+
+		return "index";
+	}
+
+	@RequestMapping("putAds")
+	public String putAds(int dev_id) {
 		List<Advertise> ads = devServiceImpl.getAdByDevID(dev_id);
 		return "index";
 	}

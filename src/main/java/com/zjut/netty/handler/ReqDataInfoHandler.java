@@ -1,5 +1,8 @@
 package com.zjut.netty.handler;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.annotation.Resource;
 
@@ -34,6 +37,14 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 	private static volatile boolean startCheck = false;
 	@Resource
 	private JedisPool jedisPool;
+	private Map<Integer, String> stateMap = new HashMap<>();
+	{
+		stateMap.put(0, "normal");
+		stateMap.put(1, "undefined");
+		stateMap.put(2, "undefined");
+		stateMap.put(3, "undefined");
+		stateMap.put(4, "undefined");
+	}
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -57,11 +68,12 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 			RspDataInfo.RspData rsp = buildRsp(req);
 			ctx.writeAndFlush(rsp);
 		} else if (msg instanceof HeartReqInfo.HeartReq) {
-			HeartReqInfo.HeartReq heartReq = (HeartReqInfo.HeartReq) msg;
 			if (startCheck) {
+				HeartReqInfo.HeartReq heartReq = (HeartReqInfo.HeartReq) msg;
 				Jedis jedis = jedisPool.getResource();
-				HeartRsp heartRsp = buildHeartRsp();
-				ctx.writeAndFlush(heartRsp);
+				int devId = heartReq.getDevId();
+				if (jedis.get(String.valueOf(devId)) == null)
+					jedis.setex(String.valueOf(devId), 480, stateMap.get(heartReq.getState()));
 			}
 		}
 		logger.info("ad counts :" + NettyServerThread.Adcounts.get(1));
@@ -97,6 +109,10 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 
 	public static void stopCheck() {
 		startCheck = false;
+	}
+
+	public static void startCheck() {
+		startCheck = true;
 	}
 
 }
