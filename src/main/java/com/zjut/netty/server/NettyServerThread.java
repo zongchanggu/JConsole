@@ -5,9 +5,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
+import com.zjut.DataFormat.HeartReqInfo;
 import com.zjut.DataFormat.ReqDataInfo;
 import com.zjut.DataFormat.ReqDataInfo.ReqData;
 import com.zjut.netty.handler.ReqDataInfoHandler;
+import com.zjut.netty.handler.TypeConvertHandlerDecoder;
+import com.zjut.netty.handler.TypeConvertHandlerEncoder;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -60,22 +63,12 @@ public class NettyServerThread implements Runnable {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						protected void initChannel(SocketChannel arg0) throws Exception {
-							arg0.pipeline().addLast(new ProtobufDecoder(ReqDataInfo.ReqData.getDefaultInstance()));
-							arg0.pipeline().addLast(new ProtobufEncoder());
+//							arg0.pipeline().addLast(new ProtobufDecoder(HeartReqInfo.HeartReq.getDefaultInstance()));
+//							arg0.pipeline().addLast(new ProtobufEncoder());
+//							arg0.pipeline().addLast(new ReqDataInfoHandler());
+							arg0.pipeline().addLast(new TypeConvertHandlerDecoder());
+							arg0.pipeline().addLast(new TypeConvertHandlerEncoder());
 							arg0.pipeline().addLast(new ReqDataInfoHandler());
-							// line based decoder
-							// arg0.pipeline().addLast(new
-							// LineBasedFrameDecoder(1024));
-							// arg0.pipeline().addLast(new StringDecoder());
-							//
-							// //delimeter based decoder
-							// ByteBuf buffer =
-							// Unpooled.copiedBuffer("$".getBytes());
-							// arg0.pipeline().addLast(new
-							// DelimiterBasedFrameDecoder(1024,buffer));
-							// arg0.pipeline().addLast(new EchoServerHandler());
-							// arg0.pipeline().addLast(new TimeServerHandler());
-
 						}
 					}).option(ChannelOption.SO_BACKLOG, 1024);
 			logger.info("Server started at port:" + port + ".....");
