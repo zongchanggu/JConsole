@@ -15,6 +15,10 @@
 			name : $('#name').val()
 		});
 	}
+	
+	function operationFormat(val, row, index){
+		return '<a href="UserDetail.action?id='+ row.id + '">查看</a>'
+	}
 </script>
 </head>
 <body>
@@ -25,15 +29,17 @@
 		<table id="userlist_tab" class="easyui-datagrid"
 			style="width: 100%; height: 88%;" toolbar="#tb" rownumbers="true"
 			pagination="true"
-			data-options="singleSelect:true,url:'getdata.action',method:'get',striped: true,">
+			data-options="singleSelect:true,url:'getUserList.action',method:'post',striped: true,">
 			<thead>
 				<tr>
-					<th field="userid" align="center" hidden="true">编号</th>
+				<th field="id" align="center" hidden="true"></th>
+					<th field="userId" width="10%" align="center">编号</th>
 					<th field="username" width="20%" align="center">用户名</th>
-					<th field="name" width="15%" align="center">姓名</th>
-					<th field="phonenum" width="15%" align="center">电话</th>
-					<th field="email" width="30%" align="center">Email</th>
-					<th field="operator" width="20%" align="center">操作</th>
+					<th field="password" width="20%" align="center">密码</th>
+					<th field="phone" width="20%" align="center">电话</th>
+					<th field="currentTime" width="20%" align="center">时间</th>
+					<th field="operator" width="10%" align="center" formatter="operationFormat">操作</th>
+					
 				</tr>
 			</thead>
 		</table>
