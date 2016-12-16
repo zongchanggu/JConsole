@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.JsonDataInfo;
 import com.zjut.service.DevService;
 
 import redis.clients.jedis.JedisPool;
@@ -28,9 +30,19 @@ public class AdvertiseAction {
 
 	@RequestMapping("getList")
 	public String getAdList() {
-		List<Advertise> ads = devServiceImpl.getAdByDevID(1);
 		String viewName = "/adsPages/ad_list";
 		return viewName;
 	}
+	
+	@RequestMapping("getAdsList")
+	@ResponseBody
+	public JsonDataInfo<Advertise> ajaxGetAdsJson(){
+		JsonDataInfo<Advertise> adsJson = new JsonDataInfo<Advertise>();
+		List<Advertise> ads = devServiceImpl.getAdByDevID(1);
+		adsJson.setRows(ads);
+		adsJson.setTotal(ads.size());
+		return adsJson;
+	}
+	
 
 }

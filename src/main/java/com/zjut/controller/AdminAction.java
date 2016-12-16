@@ -70,7 +70,6 @@ public class AdminAction {
 		User user1 = new User();
 		user1.setUserName("你好");
 		user1.setUserID(1);
-		user1.setID(1);
 		user1.setCurrentTime(new Date());
 		user1.setPassWord("123456");
 		user1.setPhone("18767671212");
@@ -81,9 +80,6 @@ public class AdminAction {
 		String key, value;
 		for (User user : userlist) {
 			Map<String, String> data = new HashMap<>();
-			key = "id";
-			value = Integer.toString(user.getID());
-			data.put(key, value);
 			key = "userId";
 			value = Integer.toString(user.getUserID());
 			data.put(key, value);
