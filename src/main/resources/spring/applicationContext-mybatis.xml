@@ -42,7 +42,7 @@
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.zjut.mapping"></property>
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
