@@ -63,12 +63,12 @@ public class NettyServerThread implements Runnable {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						protected void initChannel(SocketChannel arg0) throws Exception {
-//							arg0.pipeline().addLast(new ProtobufDecoder(HeartReqInfo.HeartReq.getDefaultInstance()));
-//							arg0.pipeline().addLast(new ProtobufEncoder());
-//							arg0.pipeline().addLast(new ReqDataInfoHandler());
-							arg0.pipeline().addLast(new TypeConvertHandlerDecoder());
-							arg0.pipeline().addLast(new TypeConvertHandlerEncoder());
+							arg0.pipeline().addLast(new ProtobufDecoder(HeartReqInfo.HeartReq.getDefaultInstance()));
+							arg0.pipeline().addLast(new ProtobufEncoder());
 							arg0.pipeline().addLast(new ReqDataInfoHandler());
+//							arg0.pipeline().addLast(new TypeConvertHandlerDecoder());
+//							arg0.pipeline().addLast(new TypeConvertHandlerEncoder());
+//							arg0.pipeline().addLast(new ReqDataInfoHandler());
 						}
 					}).option(ChannelOption.SO_BACKLOG, 1024);
 			logger.info("Server started at port:" + port + ".....");
