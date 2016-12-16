@@ -40,7 +40,7 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 
 	private Logger logger = Logger.getLogger(ReqDataInfoHandler.class);
 	private static volatile boolean startCheck = false;
-	@Resource
+	@Resource(name="jedisPool")
 	private JedisPool jedisPool;
 	private Map<Integer, String> stateMap = new HashMap<>();
 	{

@@ -11,13 +11,14 @@ import java.util.Set;
 import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
 import com.zjut.controller.DevCheck;
 import com.zjut.mapping.DevMapper;
 import com.zjut.netty.handler.ReqDataInfoHandler;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-
+@Component
 public class HealthCheckThread implements Runnable {
 	private static Logger logger = Logger.getLogger(HealthCheckThread.class);
 	private volatile boolean stop = false;
