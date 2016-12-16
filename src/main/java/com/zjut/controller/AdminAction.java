@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zjut.pojo.JsonDataInfo;
 import com.zjut.pojo.User;
+import com.zjut.service.IUserService;
 
 /**
  * 
@@ -24,6 +27,9 @@ import com.zjut.pojo.User;
 @Controller
 @RequestMapping("/adminAction")
 public class AdminAction {
+	
+	@Resource
+	private IUserService userServiceImpl;
 	
 	/**
 	 * 个人信息
@@ -65,6 +71,8 @@ public class AdminAction {
 	@ResponseBody
 	public JsonDataInfo getUserList(int page, int rows){
 		JsonDataInfo datas = new JsonDataInfo();
+		int firstRowNum = (page-1)*rows + 1;
+		int lastRowNum = page * rows;
 		List<Object> formattedDatas = new ArrayList<>();
 		List<User> userlist = new ArrayList<>();
 		User user1 = new User();
@@ -103,6 +111,8 @@ public class AdminAction {
 		}
 		datas.setTotal(15);
 		datas.setRows(formattedDatas);
+		
+		System.out.println("total:" + userServiceImpl.getTotalNum());
 		return datas;
 	}
 

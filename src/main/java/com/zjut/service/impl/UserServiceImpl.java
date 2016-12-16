@@ -1,8 +1,9 @@
 package com.zjut.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,18 @@ public class UserServiceImpl implements IUserService{
 	public User getUserById(int userId) {
 		UserMapper userMapper =sqlSessionFactory.openSession().getMapper(UserMapper.class);
 		return userMapper.selectByPrimaryKey(userId);
+	}
+	@Override
+	public List<User> getPageUserListByFL(int firstrow, int lastrow) {
+		// TODO Auto-generated method stub
+		UserMapper userMapper =sqlSessionFactory.openSession().getMapper(UserMapper.class);
+		return userMapper.getPageUserListByFL(firstrow, lastrow);
+	}
+	@Override
+	public int getTotalNum() {
+		// TODO Auto-generated method stub
+		UserMapper userMapper =sqlSessionFactory.openSession().getMapper(UserMapper.class);
+		return userMapper.getTotalNum();
 	}
 
 }
