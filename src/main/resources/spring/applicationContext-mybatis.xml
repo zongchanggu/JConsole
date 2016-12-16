@@ -27,10 +27,10 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${driver}" />
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/jconsolegroup" />
+		<property name="username" value="root" />
+		<property name="password" value="qaz123456" />
 		<property name="maxActive" value="20" />
 		<property name="maxIdle" value="20" />
 		<property name="minIdle" value="1" />
