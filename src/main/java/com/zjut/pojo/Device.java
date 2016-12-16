@@ -1,6 +1,7 @@
 package com.zjut.pojo;
 
 import java.util.Date;
+
 /**
  * 
  * @author:zongchnaggu
@@ -21,7 +22,6 @@ public class Device {
 	private String Province;
 	private String City;
 	private String Street;
-
 
 	public int getDevID() {
 		return DevID;

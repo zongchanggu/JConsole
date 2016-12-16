@@ -1,6 +1,7 @@
 package com.zjut.pojo;
 
 import java.util.Date;
+
 /**
  * 
  * @author:zongchnaggu
@@ -21,7 +22,6 @@ public class Advertise {
 	private int ViewNum;
 	private int Status;
 
-
 	public int getAdID() {
 		return AdID;
 	}
@@ -29,8 +29,6 @@ public class Advertise {
 	public void setAdID(int adID) {
 		AdID = adID;
 	}
-
-	
 
 	public int getType() {
 		return Type;
