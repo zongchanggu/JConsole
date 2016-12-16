@@ -2,27 +2,18 @@ package com.zjut.netty.handler;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.annotation.Resource;
-
-import org.apache.catalina.tribes.Heartbeat;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.zjut.DataFormat.HeartReqInfo;
-import com.zjut.DataFormat.HeartReqInfo.HeartReq;
 import com.zjut.DataFormat.HeartRspInfo;
 import com.zjut.DataFormat.HeartRspInfo.HeartRsp;
-import com.zjut.DataFormat.HeartRspInfo.HeartRsp.Builder;
 import com.zjut.DataFormat.ReqDataInfo;
 import com.zjut.DataFormat.ReqDataInfo.ReqData;
 import com.zjut.DataFormat.RspDataInfo;
 import com.zjut.DataFormat.RspDataInfo.RspData;
 import com.zjut.netty.server.NettyServerThread;
-import com.zjut.service.DevService;
-
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
@@ -36,11 +27,11 @@ import redis.clients.jedis.JedisPool;
  * @date:2016年12月13日 下午7:39:00
  */
 @Component
-public class ReqDataInfoHandler extends ChannelHandlerAdapter {
+public class ReqHealthInfoHandler extends ChannelHandlerAdapter {
 
 	private Logger logger = Logger.getLogger(ReqDataInfoHandler.class);
 	private static volatile boolean startCheck = false;
-	@Resource(name="jedisPool")
+	@Resource
 	private JedisPool jedisPool;
 	private Map<Integer, String> stateMap = new HashMap<>();
 	{
@@ -58,21 +49,16 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 			logger.info("rcv nothing...");
 			return;
 		}
-		if (msg instanceof ReqDataInfo.ReqData) {
-			ReqDataInfo.ReqData req = (ReqDataInfo.ReqData) msg;
-			int dev_id = req.getDevId();
-			int ad_id = req.getAdId();
-			if (NettyServerThread.Adcounts.get(dev_id) == null)
-				NettyServerThread.Adcounts.put(dev_id, new AtomicInteger(1));
-			else
-				NettyServerThread.Adcounts.get(dev_id).getAndIncrement();
-			if (NettyServerThread.Devcounts.get(ad_id) == null)
-				NettyServerThread.Devcounts.put(ad_id, new AtomicInteger(1));
-			else
-				NettyServerThread.Devcounts.get(ad_id).getAndIncrement();
-			RspDataInfo.RspData rsp = buildRsp(req);
-			ctx.writeAndFlush(rsp);
-		} 
+		if (msg instanceof HeartReqInfo.HeartReq) {
+			if (startCheck) {
+				HeartReqInfo.HeartReq heartReq = (HeartReqInfo.HeartReq) msg;
+				Jedis jedis = jedisPool.getResource();
+				int devId = heartReq.getDevId();
+				if (jedis.get(String.valueOf(devId)) == null)
+					jedis.setex(String.valueOf(devId), 480, stateMap.get(heartReq.getState()));
+			}
+		}
+		ctx.writeAndFlush(buildHeartRsp());
 		logger.info("ad counts :" + NettyServerThread.Adcounts.get(1));
 	}
 
@@ -81,14 +67,6 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 		rsp.setHead(4);
 		rsp.setEnd("$");
 		return rsp.build();
-	}
-
-	private RspData buildRsp(ReqData req) {
-		RspDataInfo.RspData.Builder builder = RspDataInfo.RspData.newBuilder();
-		builder.setHead(2);
-		builder.setClientHead(req.getHead());
-		builder.setEnd("$");
-		return builder.build();
 	}
 
 	@Override
