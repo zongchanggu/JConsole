@@ -15,6 +15,7 @@
 						http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
 	<context:component-scan base-package="com.zjut.controller" />
+	<mvc:annotation-driven />
 
 	<!--配置springMVC拦截器, 多个拦截器,顺序执行 -->
 	<mvc:interceptors>
