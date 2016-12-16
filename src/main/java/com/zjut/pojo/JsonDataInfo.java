@@ -2,11 +2,11 @@ package com.zjut.pojo;
 
 import java.util.List;
 
-public class JsonDataInfo {
+public class JsonDataInfo <T>{
 	
 	private int total = 0;
 	
-	private List<Object> rows = null;
+	private List<T> rows = null;
 
 	public int getTotal() {
 		return total;
@@ -16,11 +16,11 @@ public class JsonDataInfo {
 		this.total = total;
 	}
 
-	public List<Object> getRows() {
+	public List<T> getRows() {
 		return rows;
 	}
 
-	public void setRows(List<Object> rows) {
+	public void setRows(List<T> rows) {
 		this.rows = rows;
 	}
 
