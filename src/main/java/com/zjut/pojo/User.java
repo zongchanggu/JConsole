@@ -10,21 +10,12 @@ import java.util.Date;
  */
 public class User {
 
-	private int ID;
 	private int UserID;
 	private String Phone;
 	private String UserName;
 	private String PassWord;
 	private int Type;
 	private Date CurrentTime;
-
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
 
 	public int getUserID() {
 		return UserID;

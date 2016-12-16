@@ -69,16 +69,15 @@ public class AdminAction {
 	 */
 	@RequestMapping(value = "/getUserList")
 	@ResponseBody
-	public JsonDataInfo getUserList(int page, int rows){
-		JsonDataInfo datas = new JsonDataInfo();
+	public JsonDataInfo<Map<String, String>> getUserList(int page, int rows){
+		JsonDataInfo<Map<String, String>> datas = new JsonDataInfo<Map<String, String>>();
 		int firstRowNum = (page-1)*rows + 1;
 		int lastRowNum = page * rows;
-		List<Object> formattedDatas = new ArrayList<>();
+		List<Map<String, String>> formattedDatas = new ArrayList<>();
 		List<User> userlist = new ArrayList<>();
 		User user1 = new User();
 		user1.setUserName("你好");
 		user1.setUserID(1);
-		user1.setID(1);
 		user1.setCurrentTime(new Date());
 		user1.setPassWord("123456");
 		user1.setPhone("18767671212");
@@ -89,9 +88,6 @@ public class AdminAction {
 		String key, value;
 		for (User user : userlist) {
 			Map<String, String> data = new HashMap<>();
-			key = "id";
-			value = Integer.toString(user.getID());
-			data.put(key, value);
 			key = "userId";
 			value = Integer.toString(user.getUserID());
 			data.put(key, value);
@@ -111,7 +107,6 @@ public class AdminAction {
 		}
 		datas.setTotal(15);
 		datas.setRows(formattedDatas);
-		
 		System.out.println("total:" + userServiceImpl.getTotalNum());
 		return datas;
 	}

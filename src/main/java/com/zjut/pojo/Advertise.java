@@ -1,6 +1,7 @@
 package com.zjut.pojo;
 
 import java.util.Date;
+
 /**
  * 
  * @author:zongchnaggu
@@ -8,10 +9,7 @@ import java.util.Date;
  * @date:2016年12月13日 下午11:10:16
  */
 public class Advertise {
-	private int ID;
 	private int AdID;
-	private int DevID;
-	private int UserID;
 	private int Type;
 	private Date ResieterTime;
 	private Date StartTime;
@@ -24,36 +22,12 @@ public class Advertise {
 	private int ViewNum;
 	private int Status;
 
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
-
 	public int getAdID() {
 		return AdID;
 	}
 
 	public void setAdID(int adID) {
 		AdID = adID;
-	}
-
-	public int getDevID() {
-		return DevID;
-	}
-
-	public void setDevID(int devID) {
-		DevID = devID;
-	}
-
-	public int getUserID() {
-		return UserID;
-	}
-
-	public void setUserID(int userID) {
-		UserID = userID;
 	}
 
 	public int getType() {

@@ -1,6 +1,7 @@
 package com.zjut.pojo;
 
 import java.util.Date;
+
 /**
  * 
  * @author:zongchnaggu
@@ -8,12 +9,10 @@ import java.util.Date;
  * @date:2016年12月13日 下午10:46:59
  */
 public class Device {
-	private int ID;
 	private int DevID;
 	private String DevName;
 	private Date DeployTime;
 	private int Type;
-	private int AdID;
 	private int Status;
 	private int AdTotalNum;
 	private int FaultNum;
@@ -23,14 +22,6 @@ public class Device {
 	private String Province;
 	private String City;
 	private String Street;
-
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
 
 	public int getDevID() {
 		return DevID;
@@ -62,14 +53,6 @@ public class Device {
 
 	public void setType(int type) {
 		Type = type;
-	}
-
-	public int getAdID() {
-		return AdID;
-	}
-
-	public void setAdID(int adID) {
-		AdID = adID;
 	}
 
 	public int getStatus() {
