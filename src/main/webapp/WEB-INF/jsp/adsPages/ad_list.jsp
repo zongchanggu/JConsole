@@ -5,6 +5,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>广告列表</title>
 <jsp:include page="../common.jsp" />
+<script type="text/javascript">
+    function doCheck(){
+    	$.ajax({
+    		url:'${pageContext.request.contextPath}/devCheck/doHealthCheck.action',
+    		type:'get',
+    		dataType:'json',
+    		success:function(){
+    			
+    		},
+    		error:function(){
+    			alert('request error')
+    		}
+    	})
+    }
+</script>
 </head>
 <body>
 	<div class="mypanel admin-panel">
@@ -30,13 +45,19 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="SearchTB" style="padding: 10px;">
-			<span style="font-size: 14px;">用户名：</span> 
-			  	<input type="text" id="username" class="input-sm form-control" placeholder="username" style="width: 15%; display: inline-block;">
-			<span style="font-size: 14px;">&nbsp;&nbsp;姓名：</span> 
-				<input type="text" id="name" class="input-sm form-control" placeholder="name" style="width: 15%; display: inline-block;">&nbsp;&nbsp; 
-				<a class="btn btn-sm btn-default" href="#" role="button" onclick="doSearch()" style="vertical-align: inherit;">搜&nbsp;索</a>
+		<div id="tb" style="padding: 10px;">
+			<span style="font-size: 14px;">用户名：</span> <input type="text"
+				id="username" class="input-sm form-control" placeholder="username"
+				style="width: 15%; display: inline-block;"> <span
+				style="font-size: 14px;">&nbsp;&nbsp;姓名：</span> <input type="text"
+				id="name" class="input-sm form-control" placeholder="name"
+				style="width: 15%; display: inline-block;">&nbsp;&nbsp; <a
+				class="btn btn-sm btn-default" href="#" role="button"
+				onclick="doSearch()" style="vertical-align: inherit;">搜&nbsp;索</a>
+				<a class="btn btn-sm btn-default" href="#" role="button"
+				onclick="doCheck()" style="vertical-align: inherit;">设备检测</a>
 		</div>
+		
 	</div>
 </body>
 </html>

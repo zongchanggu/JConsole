@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 
 import org.apache.catalina.tribes.Heartbeat;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.zjut.DataFormat.HeartReqInfo;
 import com.zjut.DataFormat.HeartReqInfo.HeartReq;
@@ -19,6 +21,8 @@ import com.zjut.DataFormat.ReqDataInfo.ReqData;
 import com.zjut.DataFormat.RspDataInfo;
 import com.zjut.DataFormat.RspDataInfo.RspData;
 import com.zjut.netty.server.NettyServerThread;
+import com.zjut.service.DevService;
+
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
@@ -31,6 +35,7 @@ import redis.clients.jedis.JedisPool;
  * @description:created by gu
  * @date:2016年12月13日 下午7:39:00
  */
+@Component
 public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 
 	private Logger logger = Logger.getLogger(ReqDataInfoHandler.class);
@@ -40,7 +45,7 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 	private Map<Integer, String> stateMap = new HashMap<>();
 	{
 		stateMap.put(0, "normal");
-		stateMap.put(1, "undefined");
+		stateMap.put(1, "infrared sensor error");
 		stateMap.put(2, "undefined");
 		stateMap.put(3, "undefined");
 		stateMap.put(4, "undefined");
