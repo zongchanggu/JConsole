@@ -40,8 +40,9 @@ public class DevServiceImpl implements DevService {
 
 	@Override
 	public List<Device> getDevInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		DevMapper mapper = sessionTemplate.getMapper(DevMapper.class);
+		List<Device> devs = mapper.getDevInfo();
+		return devs;
 	}
 
 	@Override

@@ -68,8 +68,8 @@
 			<span class="fa fa-television"></span>设备管理
 		</h2>
 		<ul>
-			<li><a href="deviceslist.jsp" target="right"><span
-					class="icon-caret-right"></span>设备管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/DevAction/getDevList.action" target="right"><span
+					class="icon-caret-right"></span>设备列表</a></li>
 
 		</ul>
 	</div>

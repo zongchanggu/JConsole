@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.Device;
 import com.zjut.pojo.JsonDataInfo;
 import com.zjut.service.DevService;
 
@@ -33,7 +34,7 @@ public class AdvertiseAction {
 		String viewName = "/adsPages/ad_list";
 		return viewName;
 	}
-	
+
 	@RequestMapping("getAdsList")
 	@ResponseBody
 	public JsonDataInfo<Advertise> ajaxGetAdsJson(){

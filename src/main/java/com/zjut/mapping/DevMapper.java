@@ -3,6 +3,7 @@ package com.zjut.mapping;
 import java.util.List;
 
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.Device;
 
 /**
  * 
@@ -15,5 +16,7 @@ public interface DevMapper {
 	public List<Advertise> getAdByDevID(int dev_id);
 
 	public List<Integer> getDevIds();
+	
+	public List<Device> getDevInfo();
 
 }

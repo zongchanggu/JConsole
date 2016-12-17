@@ -22,6 +22,7 @@ public class Device {
 	private String Province;
 	private String City;
 	private String Street;
+	private String District;
 
 	public int getDevID() {
 		return DevID;
@@ -125,6 +126,14 @@ public class Device {
 
 	public void setStreet(String street) {
 		Street = street;
+	}
+
+	public String getDistrict() {
+		return District;
+	}
+
+	public void setDistrict(String district) {
+		District = district;
 	}
 
 }
