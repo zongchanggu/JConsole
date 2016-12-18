@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.zjut.pojo.Advertise;
 import com.zjut.pojo.Device;
+import com.zjut.pojo.Page;
+import com.zjut.pojo.SearchEntity;
 
 /**
  * 
@@ -16,7 +18,17 @@ public interface DevMapper {
 	public List<Advertise> getAdByDevID(int dev_id);
 
 	public List<Integer> getDevIds();
-	
-	public List<Device> getDevInfo();
+
+	public List<Device> getDevInfo(Page p);
+
+	public Device getDevDetail(int devId);
+
+	public void insertDevInfo(Device device);
+
+	public void deleteDevsInfo(int[] ids);
+
+	public Integer getTotal();
+
+	public List<Device> searchDevInfoByCondition(SearchEntity entity);
 
 }

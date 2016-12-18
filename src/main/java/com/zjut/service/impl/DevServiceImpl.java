@@ -9,6 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.zjut.mapping.DevMapper;
 import com.zjut.pojo.Advertise;
 import com.zjut.pojo.Device;
+import com.zjut.pojo.Page;
+import com.zjut.pojo.SearchEntity;
 import com.zjut.service.DevService;
 
 /**
@@ -39,9 +41,9 @@ public class DevServiceImpl implements DevService {
 	}
 
 	@Override
-	public List<Device> getDevInfo() {
+	public List<Device> getDevInfo(Page p) {
 		DevMapper mapper = sessionTemplate.getMapper(DevMapper.class);
-		List<Device> devs = mapper.getDevInfo();
+		List<Device> devs = mapper.getDevInfo(p);
 		return devs;
 	}
 
@@ -49,6 +51,38 @@ public class DevServiceImpl implements DevService {
 	public List<Advertise> getAdByDevID(int dev_id) {
 		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
 		return devMapper.getAdByDevID(dev_id);
+	}
+
+	@Override
+	public Device getDevDetail(int devID) {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		return devMapper.getDevDetail(devID);
+	}
+
+	@Override
+	public void insertDevInfo(Device device) {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		devMapper.insertDevInfo(device);
+	}
+
+	@Override
+	public void deleteDevsInfo(int[] ids) {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		devMapper.deleteDevsInfo(ids);
+	}
+
+	@Override
+	public Integer getTotal() {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		Integer total = devMapper.getTotal();
+		return total;
+	}
+
+	@Override
+	public List<Device> searchDevInfoByCondition(SearchEntity entity) {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		List<Device> devs = devMapper.searchDevInfoByCondition(entity);
+		return devs;
 	}
 
 }

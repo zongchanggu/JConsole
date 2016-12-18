@@ -1,6 +1,13 @@
 package com.zjut.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zjut.interceptor.DateSerializer;
 
 /**
  * 
@@ -8,21 +15,25 @@ import java.util.Date;
  * @description:created by gu
  * @date:2016年12月13日 下午10:46:59
  */
-public class Device {
+public class Device implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6853541868918717139L;
 	private int DevID;
 	private String DevName;
-	private Date DeployTime;
 	private int Type;
+	private Date DeployTime;
 	private int Status;
+	private String Province;
+	private String City;
+	private String District;
+	private String Street;
+	private String Location;
+	private String AddressXY;
 	private int AdTotalNum;
 	private int FaultNum;
 	private Date CurrentTime;
-	private String AddressXY;
-	private String Location;
-	private String Province;
-	private String City;
-	private String Street;
-	private String District;
 
 	public int getDevID() {
 		return DevID;
@@ -40,10 +51,11 @@ public class Device {
 		DevName = devName;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  
 	public Date getDeployTime() {
 		return DeployTime;
 	}
-
 	public void setDeployTime(Date deployTime) {
 		DeployTime = deployTime;
 	}
@@ -79,11 +91,11 @@ public class Device {
 	public void setFaultNum(int faultNum) {
 		FaultNum = faultNum;
 	}
-
+	@JsonSerialize(using=DateSerializer.class)
 	public Date getCurrentTime() {
 		return CurrentTime;
 	}
-
+	@JsonSerialize(using=DateSerializer.class)
 	public void setCurrentTime(Date currentTime) {
 		CurrentTime = currentTime;
 	}
