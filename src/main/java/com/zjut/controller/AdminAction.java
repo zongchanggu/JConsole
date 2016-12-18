@@ -8,10 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.jws.WebParam.Mode;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.zjut.pojo.JsonDataInfo;
 import com.zjut.pojo.User;
@@ -71,20 +77,10 @@ public class AdminAction {
 	@ResponseBody
 	public JsonDataInfo<Map<String, String>> getUserList(int page, int rows){
 		JsonDataInfo<Map<String, String>> datas = new JsonDataInfo<Map<String, String>>();
-		int firstRowNum = (page-1)*rows + 1;
-		int lastRowNum = page * rows;
+		int firstRowNum = (page-1)*rows;
+		int lastRowNum = page * rows - 1;
+		List<User> userlist = userServiceImpl.getPageUserListByFL(firstRowNum, lastRowNum);
 		List<Map<String, String>> formattedDatas = new ArrayList<>();
-		List<User> userlist = new ArrayList<>();
-		User user1 = new User();
-		user1.setUserName("你好");
-		user1.setUserID(1);
-		user1.setCurrentTime(new Date());
-		user1.setPassWord("123456");
-		user1.setPhone("18767671212");
-		user1.setType(1);
-		for (int i = 0; i < 15; i++) {
-			userlist.add(user1);
-		}
 		String key, value;
 		for (User user : userlist) {
 			Map<String, String> data = new HashMap<>();
@@ -100,15 +96,35 @@ public class AdminAction {
 			key = "phone";
 			value = user.getPhone();
 			data.put(key, value);
+			key = "type";
+			value = Integer.toString(user.getType());
+			System.out.println("type:" + user.getType());
+			data.put(key, value);
 			key = "currentTime";
 			value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getCurrentTime());
 			data.put(key, value);
 			formattedDatas.add(data);
 		}
-		datas.setTotal(15);
+		datas.setTotal(userServiceImpl.getTotalNum());
 		datas.setRows(formattedDatas);
 		System.out.println("total:" + userServiceImpl.getTotalNum());
 		return datas;
+	}
+
+	/**
+	 * 根据userId获取用户信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/getUserDetail", method = {RequestMethod.POST})
+	public ModelAndView getUserDetail(int id){
+		User user = userServiceImpl.getUserById(id);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("user", user);
+		String viewName = "/adminPages/userDetail";
+		mView.setViewName(viewName);
+		//request.setAttribute("userDetail", userDetail);
+		return mView;
 	}
 
 }

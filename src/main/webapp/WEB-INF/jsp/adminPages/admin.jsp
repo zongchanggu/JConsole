@@ -11,9 +11,17 @@
 	href="${pageContext.request.contextPath}/css/pintuer.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/admin.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/font-awesome-4.7.0/css/font-awesome.min.css">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body style="background-color: #f2f9fd;">
 
@@ -68,8 +76,9 @@
 			<span class="fa fa-television"></span>设备管理
 		</h2>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/DevAction/getDevList.action" target="right"><span
-					class="icon-caret-right"></span>设备列表</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/DevAction/getDevList.action"
+				target="right"><span class="icon-caret-right"></span>设备列表</a></li>
 
 		</ul>
 	</div>
@@ -100,6 +109,5 @@
 		<iframe scrolling="auto" rameborder="0" src="user_info.action"
 			name="right" width="100%" height="100%"></iframe>
 	</div>
-
 </body>
 </html>

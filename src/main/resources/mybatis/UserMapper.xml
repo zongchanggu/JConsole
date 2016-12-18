@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zjut.mapping.UserMapper">
     <resultMap id="BaseResultMap" type="com.zjut.pojo.User">
-        <id column="ID" property="ID" jdbcType="INTEGER"/>
-        <result column="UserID" property="UserID" jdbcType="INTEGER"/>
+        <id column="UserID" property="UserID" jdbcType="INTEGER"/>
         <result column="Phone" property="Phone" jdbcType="VARCHAR" />
         <result column="UserName" property="UserName" jdbcType="VARCHAR" />
         <result column="PassWord" property="PassWord" jdbcType="VARCHAR"/>
@@ -11,7 +10,7 @@
         <result column="CurrentTime" property="CurrentTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, UserID, UserName, PassWord, Phone, CurrentTime
+        UserID, UserName, PassWord, Phone, Type, CurrentTime
     </sql>
     
     <select id="getTotalNum" resultType="java.lang.Integer">
@@ -22,12 +21,12 @@
         select
         <include refid="Base_Column_List"/>
         from user
-        where ID = #{userId,jdbcType=INTEGER}
+        where UserID = #{0}
     </select>
     
      <select id="getPageUserListByFL" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from user limit #{firstrow}, #{lastrow}
+        from user limit #{0}, #{1}
     </select>
 </mapper>
