@@ -7,7 +7,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zjut.interceptor.DateSerializer;
 
 /**
  * 
@@ -91,11 +90,9 @@ public class Device implements Serializable {
 	public void setFaultNum(int faultNum) {
 		FaultNum = faultNum;
 	}
-	@JsonSerialize(using=DateSerializer.class)
 	public Date getCurrentTime() {
 		return CurrentTime;
 	}
-	@JsonSerialize(using=DateSerializer.class)
 	public void setCurrentTime(Date currentTime) {
 		CurrentTime = currentTime;
 	}
