@@ -28,7 +28,49 @@
 		select DevID from device
 	</select>
 	
-	<select id="getDevInfo" resultMap="DevResultMap">
+	<select id="getDevInfo" resultMap="DevResultMap" parameterType="pageParam">
 		select * from device
+		limit #{start},#{end}
 	</select>
+	<select id="getDevDetail" resultMap="DevResultMap" parameterType="java.lang.Integer">
+		select * from device where DevID=#{devID}
+	</select>
+	
+	<insert id="insertDevInfo" parameterType="com.zjut.pojo.Device" useGeneratedKeys="true" keyProperty="DevID">
+		insert into device(DevName,DeployTime,Type,Status,CurrentTime,AddressXY,Location,Province,City,District,Street)
+		values(#{devName},#{deployTime},#{type},#{status},NOW(),#{addressXY},#{location},#{province},#{city},#{district},#{street});
+	</insert>
+	
+	<delete id="deleteDevsInfo">
+		delete from device
+		where DevID in
+		<foreach collection="array" item="devID" open="(" separator="," close=")">
+			#{devID}
+		</foreach>
+	</delete>
+	
+	<select id="getTotal" resultType="java.lang.Integer">
+	    select count(*) from device
+	</select>
+	
+	<select id="searchDevInfoByCondition" parameterType="searchEntity" resultMap="DevResultMap">
+	     select * from device
+	     where 1=1
+	     <if test="startTime!=null and endTime!=null">
+	          and DeployTime between #{startTime} and #{endTime} and
+	     </if>
+	     <if test="startTime!=null and endTime ==null">
+	         and DeployTime between #{startTime} and NOW()
+	     </if>
+	     <if test="startTime==null and endTime !=null">
+	         and #{endTime} >=DeployTime
+	     </if>
+	     <if test="status!=null" >
+	        and Status = #{status}
+	     </if>
+	     <if test="DevName!=null">
+	        and DevName like CONCAT('%',#{DevName},'%')
+	     </if>
+	</select>
+	
 </mapper>
