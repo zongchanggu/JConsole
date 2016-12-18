@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
@@ -17,20 +18,27 @@ public class UserServiceImpl implements IUserService{
 	private SqlSessionFactory sqlSessionFactory;
 	@Override
 	public User getUserById(int userId) {
-		UserMapper userMapper =sqlSessionFactory.openSession().getMapper(UserMapper.class);
-		return userMapper.selectByPrimaryKey(userId);
+		SqlSession session = sqlSessionFactory.openSession();
+		UserMapper userMapper = session.getMapper(UserMapper.class);
+		User result = userMapper.selectByPrimaryKey(userId);
+		session.close();
+		return result;
 	}
 	@Override
 	public List<User> getPageUserListByFL(int firstrow, int lastrow) {
-		// TODO Auto-generated method stub
-		UserMapper userMapper =sqlSessionFactory.openSession().getMapper(UserMapper.class);
-		return userMapper.getPageUserListByFL(firstrow, lastrow);
+		SqlSession session = sqlSessionFactory.openSession();
+		UserMapper userMapper = session.getMapper(UserMapper.class);
+		List<User> result = userMapper.getPageUserListByFL(firstrow, lastrow);
+		session.close();
+		return result;
 	}
 	@Override
 	public int getTotalNum() {
-		// TODO Auto-generated method stub
-		UserMapper userMapper =sqlSessionFactory.openSession().getMapper(UserMapper.class);
-		return userMapper.getTotalNum();
+		SqlSession session = sqlSessionFactory.openSession();
+		UserMapper userMapper =session.getMapper(UserMapper.class);
+		int result = userMapper.getTotalNum();
+		session.close();
+		return result;
 	}
 
 }
