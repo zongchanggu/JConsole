@@ -27,12 +27,31 @@ import com.zjut.pojo.Page;
 import com.zjut.pojo.SearchEntity;
 import com.zjut.service.DevService;
 
+/**
+ * 
+ * @author:zongchnaggu
+ * @description:created by gu
+ * @date:2016年12月19日 下午1:04:19
+ */
 @Controller
 @RequestMapping("DevAction")
 public class DeviceAction {
 
 	@Resource
 	private DevService devServiceImpl;
+
+	@RequestMapping("getBaiduMap")
+	public String getBaiduMap() {
+		return "/devsPages/baidu_map";
+	}
+
+	@RequestMapping("getDevsAddressXY")
+	@ResponseBody
+	public List<Device> getDevsAddressXY(String name) {
+		name = "hz";
+		List<Device> xys = devServiceImpl.getDevsAddressXY(name);
+		return xys;
+	}
 
 	@RequestMapping("getDevList")
 	public String getDevsList() {
@@ -44,8 +63,8 @@ public class DeviceAction {
 	@ResponseBody
 	public JsonDataInfo<Device> ajaxGetDevJson(int page, int rows) {
 		Page p = new Page();
-		p.setStart((page-1)*rows);
-		p.setEnd(page*rows);
+		p.setStart((page - 1) * rows);
+		p.setEnd(page * rows);
 		JsonDataInfo<Device> devsJson = new JsonDataInfo<>();
 		List<Device> devs = devServiceImpl.getDevInfo(p);
 		int size = devServiceImpl.getTotal();
@@ -60,17 +79,17 @@ public class DeviceAction {
 		Device device = devServiceImpl.getDevDetail(devID);
 		return device;
 	}
-	
+
 	@RequestMapping("deleteDevsInfo")
 	@ResponseBody
-	public String deleteDevsInfo(@RequestParam(value="ids[]") int[] ids){
+	public String deleteDevsInfo(@RequestParam(value = "ids[]") int[] ids) {
 		devServiceImpl.deleteDevsInfo(ids);
 		return "success";
 	}
-	
+
 	@RequestMapping("doSearchDev")
 	@ResponseBody
-	public JsonDataInfo<Device> doSearch(SearchEntity entity){
+	public JsonDataInfo<Device> doSearch(SearchEntity entity) {
 		List<Device> devs = devServiceImpl.searchDevInfoByCondition(entity);
 		JsonDataInfo<Device> devsJson = new JsonDataInfo<>();
 		devsJson.setRows(devs);

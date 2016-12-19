@@ -29,12 +29,6 @@ public class DevServiceImpl implements DevService {
 	}
 
 	@Override
-	public Device getDevInfoByAddress(String address) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Device getDevInfoByXY(String AddressXY) {
 		// TODO Auto-generated method stub
 		return null;
@@ -85,4 +79,10 @@ public class DevServiceImpl implements DevService {
 		return devs;
 	}
 
+	@Override
+	public List<Device> getDevsAddressXY(String cityName) {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		List<Device> xys = devMapper.getDevsAddressXY(cityName);
+		return xys;
+	}
 }

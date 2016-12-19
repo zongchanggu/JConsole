@@ -73,4 +73,8 @@
 	     </if>
 	</select>
 	
+	<select id="getDevsAddressXY" parameterType="java.lang.String" resultMap="DevResultMap">
+		select * from device where City like CONCAT('%',#{cityName},'%')
+	</select>
+	
 </mapper>

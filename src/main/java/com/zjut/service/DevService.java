@@ -17,8 +17,6 @@ public interface DevService {
 
 	public Device getDevInfoByKey(int dev_id);
 
-	public Device getDevInfoByAddress(String address);
-
 	public Device getDevInfoByXY(String AddressXY);
 
 	public List<Device> getDevInfo(Page p);
@@ -28,11 +26,13 @@ public interface DevService {
 	public Device getDevDetail(int devID);
 
 	public void insertDevInfo(Device device);
-	
+
 	public void deleteDevsInfo(int[] ids);
-	
+
 	public Integer getTotal();
-	
+
 	public List<Device> searchDevInfoByCondition(SearchEntity entity);
+
+	public List<Device> getDevsAddressXY(String cityName);
 
 }

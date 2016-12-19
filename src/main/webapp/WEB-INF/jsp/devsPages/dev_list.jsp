@@ -116,7 +116,7 @@ $(function(){
 	}
 	
 	function clearForm(){
-		$('addForm').form('clear');
+		$('#addForm').form('clear');
 	}
 	function doSearch() {
 		var startTime = $("#dateStart").val();
@@ -137,7 +137,7 @@ $(function(){
 						if(result!=null){
 							 $.messager.show({ 
 					              title: '提示消息', 
-					              msg: '提交成功', 
+					              msg: '搜索', 
 					              showType: 'show', 
 					              timeout: 1000, 
 					              style: { 
@@ -176,7 +176,7 @@ $(function(){
 					<th field="currentTime" width="15%" align="center"
 						data-options="formatter:function(value, row, index){
 						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">CurrentTime</th>
-					<th field="operator" formatter="operationFormat">设备详情</th>
+					<th field="operator" formatter="operationFormat">修改</th>
 				</tr>
 			</thead>
 		</table>
