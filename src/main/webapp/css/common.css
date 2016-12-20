@@ -1,4 +1,3 @@
-<style type="text/css">
 iframe {
 	margin: 0;
 	padding: 0;
@@ -47,4 +46,49 @@ html {
 	border-right: solid 1px #ddd;
 	border-top: solid 1px #ddd;
 }
-</style>
+
+.search-toolbar {
+	display: inline-block;
+	vertical-align: inherit;
+	width: 20%;
+}
+
+.search-toolbar-content {
+	display: table;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	outline: none;
+	/*box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075)*/
+	width: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.search-toolbar-key {
+	font-size: 12px;
+	vertical-align: middle;
+	display: table-cell;
+	white-space: nowrap;
+	border-right: 1px solid #eee;
+	padding-left: 5px;
+}
+
+.search-toolbar-content input {
+	width: 100%;
+	vertical-align: middle;
+	display: table-cell;
+	border: 0;
+	box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075);
+}
+
+.textbox{
+	border: 0;
+}
+
+.selectbox{
+	display:inline-block;
+	border: 1px solid #D3D3D3;
+	border-radius: 3px 3px 3px 3px;
+}

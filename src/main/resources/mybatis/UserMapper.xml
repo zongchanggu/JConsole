@@ -1,32 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zjut.mapping.UserMapper">
-    <resultMap id="BaseResultMap" type="com.zjut.pojo.User">
-        <id column="UserID" property="UserID" jdbcType="INTEGER"/>
-        <result column="Phone" property="Phone" jdbcType="VARCHAR" />
-        <result column="UserName" property="UserName" jdbcType="VARCHAR" />
-        <result column="PassWord" property="PassWord" jdbcType="VARCHAR"/>
-        <result column="Type" property="Type" jdbcType="INTEGER"/>
-        <result column="CurrentTime" property="CurrentTime"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        UserID, UserName, PassWord, Phone, Type, CurrentTime
-    </sql>
-    
-    <select id="getTotalNum" resultType="java.lang.Integer">
-        select COUNT(*) from user
-    </select>
-    
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where UserID = #{0}
-    </select>
-    
-     <select id="getPageUserListByFL" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from user limit #{0}, #{1}
-    </select>
+	<resultMap id="BaseResultMap" type="com.zjut.pojo.User">
+		<id column="UserID" property="UserID" jdbcType="INTEGER" />
+		<result column="Phone" property="Phone" jdbcType="VARCHAR" />
+		<result column="UserName" property="UserName" jdbcType="VARCHAR" />
+		<result column="PassWord" property="PassWord" jdbcType="VARCHAR" />
+		<result column="CurrentTime" property="CurrentTime" />
+		<!-- <result column="Comment" property="Type" /> -->
+		<association property="Type" javaType="userType">
+			<id property="TypeID" column="TypeID"></id>
+			<result property="Comment" column="Comment"></result>
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		UserID, UserName, PassWord, Phone, CurrentTime, Comment, TypeID
+	</sql>
+
+	<select id="getTotalNum" resultType="java.lang.Integer">
+		select COUNT(*) from user
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user, usertype
+		where user.Type=usertype.TypeID and UserID = #{0}
+	</select>
+
+	<select id="getPageUserListByFL" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user, usertype
+		where user.Type=usertype.TypeID
+		limit #{0}, #{1}
+	</select>
+	
+	<select id="searchPageUserList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user, usertype
+		where user.Type=usertype.TypeID and 1=1
+		<if test=' param3 !=""'>
+	          and UserName like CONCAT('%',#{2},'%')
+	     </if>
+	     <if test=' param4 !=""'>
+	          and Phone like CONCAT('%',#{3},'%')
+	     </if>
+	     <if test=' param5 !=""'>
+	          and Comment = #{4}
+	     </if>
+		limit #{0}, #{1}
+	</select>
+	
 </mapper>

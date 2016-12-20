@@ -20,39 +20,62 @@
 			data-options="nowrap:true, emptyMsg: '无记录', singleSelect:true,url:'getUserList.action',method:'post',striped: true,pageSize:20">
 			<thead>
 				<tr>
-					<th field="userId" align="center" hidden="true"></th>
-					<th field="username" width="20%" align="center">姓名</th>
-					<th field="password" width="20%" align="center">密码</th>
-					<th field="phone" width="20%" align="center">电话</th>
-					<th field="currentTime" width="20%" align="center">注册时间</th>
-					<th field="type" width="10%" align="center">用户类型</th>
-					<th field="operator" width="10%" align="center"
+					<th field="userID" align="center" hidden="true"></th>
+					<th field="userName" width="20%" align="center">姓名</th>
+					<th field="phone" width="25%" align="center">电话</th>
+					<th field="currentTime" width="25%" align="center">注册时间</th>
+					<th field="type" width="15%" align="center"
+						data-options="formatter:function(value, row, index){
+					return value.comment;}">用户类型</th>
+					<th field="operator" width="15%" align="center"
 						formatter="javascript:operationFormat">操作</th>
 
 				</tr>
 			</thead>
 		</table>
-		<div id="tb" style="padding: 10px;">
-			<span style="font-size: 14px;">用户名：</span> <input type="text"
-				id="username" class="input-sm form-control" placeholder="username"
-				style="width: 15%; display: inline-block;"> <span
-				style="font-size: 14px;">&nbsp;&nbsp;姓名：</span> <input type="text"
-				id="name" class="input-sm form-control" placeholder="name"
-				style="width: 15%; display: inline-block;">&nbsp;&nbsp; <a
-				class="btn btn-sm btn-default" href="#" role="button"
-				onclick="doSearch()" style="vertical-align: inherit;">搜&nbsp;索</a>
+		<div id="tb" style="padding: 10px; vertical-align: middle;">
+			<div class="search-toolbar">
+				<div class="search-toolbar-content">
+					<div class="search-toolbar-key">&nbsp;用户名：</div>
+					<input type="text" id="username" class="input-sm form-control"
+						placeholder="username">
+				</div>
+			</div>
+			<div class="search-toolbar" style="margin-left: 3px;">
+				<div class="search-toolbar-content">
+					<div class="search-toolbar-key">&nbsp;电话：</div>
+					<input type="text" id="phone" class="input-sm form-control"
+						placeholder="phone">
+				</div>
+			</div>
+			<div style="display: inline-block; margin-left: 3px;">
+				<div class="selectbox">
+					<select id="type" class="easyui-combobox" panelHeight="auto"
+						style="height: 30px; vertical-align: middle;">
+						<option value="">--用户类型--</option>
+						<option value="普通用户">普通用户</option>
+						<option value="信誉用户">信誉用户</option>
+					</select>
+				</div>
+				&nbsp; <a class="btn btn-sm btn-default" href="#" role="button"
+					onclick="doSearch()"
+					style="vertical-align: middle; height: inherit;">搜&nbsp;索</a>
+
+			</div>
 		</div>
-		<p></p>
 		<script type="text/javascript">
-		
 			function doSearch() {
+				var username = $('#username').val();
+				var phone = $('#phone').val();
+				var usertype = $('#type').val();
 				$('#userlist_tab').datagrid('load', {
-					username : $('#username').val(),
-					name : $('#name').val()
+					username : username,
+					phone : phone,
+					usertype : usertype
 				});
 			};
 			function operationFormat(val, row, index) {
-				return '<a href="javascript:getUserInfo(' + row.userId
+				return '<a href="javascript:getUserInfo(' + row.userID
 						+ ')">查看</a>'
 			};
 
@@ -64,17 +87,18 @@
 				}
 				var mis_page = query('#userDetail_dlg');
 				mis_page.dialog({
-					shadow: true,
-					maximizable: true,
-					collapsible: false,
+					shadow : true,
+					closed : true,
+					maximizable : true,
+					collapsible : false,
 					title : '用户详情',
 					width : '70%',
 					height : 520,
 					modal : true,
-					show: 'slide',
+					show : 'slide',
 				});
 				query.messager.progress({
-					title:'请等待...',
+					title : '请等待...',
 					msg : '加载中...'
 				});
 				query.ajax({
@@ -87,6 +111,7 @@
 						mis_page.html(htm);
 						query.parser.parse(mis_page);
 						query.messager.progress('close');
+						mis_page.dialog('open');
 					},
 					error : function() {
 						query.messager.progress('close');
