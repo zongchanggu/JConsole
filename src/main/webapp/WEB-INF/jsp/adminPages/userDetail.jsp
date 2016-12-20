@@ -10,6 +10,7 @@
 </head>
 <body>
 	<div id="content" style="padding: 15px;">
+	<form action="">
 		<div id="userDetail"
 			style="border-radius: 4px 4px 4px 4px; border: solid 1px #ddd; padding: 5px;">
 			<div class="welcome-info">
@@ -28,25 +29,16 @@
 							<td>手机：<span>${user.phone}</span></td>
 						</tr>
 						<tr>
-							<td>注册时间：<span id="registTime">${user.currentTime}</span></td>
-							<td>用户类型：<span>${user.type}</span></td>
+							<td>注册时间：<span>${user.currentTime}</span></td>
+							<td>用户类型：<span>${user.type.comment}</span></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<script type="text/javascript">
-				$(document).ready(
-						function() {
-							var timeValue = $("#registTime").text();
-							var formattime = new Date(timeValue);
-							var formattedTime = formattime
-									.Format('yyyy-MM-dd hh:mm:ss');
-							$("#registTime").text(formattedTime);
-						});
-			</script>
+			
 			<div class="seperate-line"></div>
 		</div>
-
+</form>
 		<div id="adlist"
 			style="border-radius: 4px 4px 4px 4px; border: solid 1px #ddd; padding: 5px; margin-top: 20px;">
 			<div class="welcome-info">

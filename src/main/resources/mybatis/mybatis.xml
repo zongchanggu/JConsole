@@ -19,6 +19,7 @@
 		<typeAlias type="com.zjut.pojo.User" alias="user" />
 		<typeAlias type="com.zjut.pojo.Page" alias="pageParam"/>
 		<typeAlias type="com.zjut.pojo.SearchEntity" alias="searchEntity"/>
+		<typeAlias type="com.zjut.pojo.UserType" alias="userType"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/UserMapper.xml" />

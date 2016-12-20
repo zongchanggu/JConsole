@@ -1,6 +1,11 @@
 package com.zjut.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * 
@@ -8,15 +13,16 @@ import java.util.Date;
  * @description:created by gu
  * @date:2016年12月13日 下午11:09:54
  */
-public class User {
+public class User implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int UserID;
 	private String Phone;
 	private String UserName;
 	private String PassWord;
-	private int Type;
+	private UserType Type;
 	private Date CurrentTime;
-
+	
 	public int getUserID() {
 		return UserID;
 	}
@@ -49,14 +55,16 @@ public class User {
 		PassWord = passWord;
 	}
 
-	public int getType() {
+	public UserType getType() {
 		return Type;
 	}
 
-	public void setType(int type) {
+	public void setType(UserType type) {
 		Type = type;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getCurrentTime() {
 		return CurrentTime;
 	}
