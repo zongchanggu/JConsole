@@ -150,6 +150,46 @@ $(function(){
 					}
 				})
 	}
+	function doDeliver(){
+    	var item = $('#AdList').datagrid('getSelections');
+    	if(item.length < 1){
+    		$.messager.show({
+				title:'Warning',
+				msg:'请选好待投放设备！'
+			});
+    	}
+    	else{
+    		var ids=new Array();
+        	for(var i =0 ;i<item.length;i++)
+        		ids.push(item[i].devID);
+    		$.messager.confirm({
+    			title: 'Delete info',
+    			msg: '确定投放？',
+    			fn: function(r){
+    				if (r){
+    					$.ajax({
+    						url:'${pageContext.request.contextPath}/DevAction/deliverAds.action',
+    						data:{ids:ids},
+    						type:'Post',
+    						success:function(result){
+    							$('#AdList').datagrid('reload');
+    							$('#AdList').datagrid('uncheckAll');
+    							if(result != null){
+    								$.messager.show({
+    									title:'Delete result',
+    									msg:'投放成功',
+    									timeout:1000,
+    									showType:'slide'
+    								});
+    							}
+    						}
+    					})
+    				}
+    			}
+    		});
+    	}		
+		
+	}
 </script>
 </head>
 <body>
@@ -200,6 +240,7 @@ $(function(){
 				</select>
 				DevName <input id="name" class="easyui-textbox"></input> 
 				<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="doSearch()">Search</a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-text" onclick="doDeliver()">Ad Deliver</a>
 			</div>
 		</div>
 		<div id="addWindow" class="easyui-dialog" title="添加设备" closed="true"

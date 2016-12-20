@@ -15,66 +15,90 @@
 		<result column="Province" property="Province" />
 		<result column="City" property="City" />
 		<result column="Street" property="Street" />
-		<result column="District" property="District"/>
+		<result column="District" property="District" />
 	</resultMap>
-	<select id="getAdByDevID" resultMap="com.zjut.mapping.AdMapper.AdResultMap"
-		parameterType="java.lang.Integer">
-		select * from advertise where AdID in
-		(select AdID from
-		device where DevId = #{dev_id})
+	<resultMap type="com.zjut.pojo.DevToAd" id="DevToAdMap">
+		<id column="ID" property="ID" />
+		<result column="DevID" property="DevID" />
+		<result column="AdID" property="AdID" />
+		<result column="DevName" property="DevName" />
+		<result column="AdName" property="AdName" />
+		<result column="DevType" property="DevType" />
+		<result column="DevStatus" property="DevStatus" />
+		<result column="AdType" property="AdType" />
+		<result column="AdStatus" property="AdStatus" />
+		<result column="StartTime" property="StartTime" />
+		<result column="EndTime" property="EndTime" />
+		<result column="RealPath" property="RealPath" />
+	</resultMap>
+	<select id="getAdByDevID" resultMap="DevToAdMap" parameterType="java.lang.Integer">
+		select
+		<include refid="fields" />
+		from devtoad where DevID =#{dev_id}
 	</select>
+
+	<sql id="fields">
+		AdID,AdType,AdStatus,EndTime,RealPath,AdName
+	</sql>
 
 	<select id="getDevIds" resultType="java.lang.Integer">
 		select DevID from device
 	</select>
-	
+
 	<select id="getDevInfo" resultMap="DevResultMap" parameterType="pageParam">
 		select * from device
 		limit #{start},#{end}
 	</select>
-	<select id="getDevDetail" resultMap="DevResultMap" parameterType="java.lang.Integer">
+	<select id="getDevDetail" resultMap="DevResultMap"
+		parameterType="java.lang.Integer">
 		select * from device where DevID=#{devID}
 	</select>
-	
-	<insert id="insertDevInfo" parameterType="com.zjut.pojo.Device" useGeneratedKeys="true" keyProperty="DevID">
-		insert into device(DevName,DeployTime,Type,Status,CurrentTime,AddressXY,Location,Province,City,District,Street)
+
+	<insert id="insertDevInfo" parameterType="com.zjut.pojo.Device"
+		useGeneratedKeys="true" keyProperty="DevID">
+		insert into
+		device(DevName,DeployTime,Type,Status,CurrentTime,AddressXY,Location,Province,City,District,Street)
 		values(#{devName},#{deployTime},#{type},#{status},NOW(),#{addressXY},#{location},#{province},#{city},#{district},#{street});
 	</insert>
-	
+
 	<delete id="deleteDevsInfo">
 		delete from device
 		where DevID in
-		<foreach collection="array" item="devID" open="(" separator="," close=")">
+		<foreach collection="array" item="devID" open="(" separator=","
+			close=")">
 			#{devID}
 		</foreach>
 	</delete>
-	
+
 	<select id="getTotal" resultType="java.lang.Integer">
-	    select count(*) from device
+		select count(*) from device
 	</select>
-	
-	<select id="searchDevInfoByCondition" parameterType="searchEntity" resultMap="DevResultMap">
-	     select * from device
-	     where 1=1
-	     <if test="startTime!=null and endTime!=null">
-	          and DeployTime between #{startTime} and #{endTime} and
-	     </if>
-	     <if test="startTime!=null and endTime ==null">
-	         and DeployTime between #{startTime} and NOW()
-	     </if>
-	     <if test="startTime==null and endTime !=null">
-	         and #{endTime} >=DeployTime
-	     </if>
-	     <if test="status!=null" >
-	        and Status = #{status}
-	     </if>
-	     <if test="DevName!=null">
-	        and DevName like CONCAT('%',#{DevName},'%')
-	     </if>
+
+	<select id="searchDevInfoByCondition" parameterType="searchEntity"
+		resultMap="DevResultMap">
+		select * from device
+		where 1=1
+		<if test="startTime!=null and endTime!=null">
+			and DeployTime between #{startTime} and #{endTime} and
+		</if>
+		<if test="startTime!=null and endTime ==null">
+			and DeployTime between #{startTime} and NOW()
+		</if>
+		<if test="startTime==null and endTime !=null">
+			and #{endTime} >=DeployTime
+		</if>
+		<if test="status!=null">
+			and Status = #{status}
+		</if>
+		<if test="DevName!=null">
+			and DevName like CONCAT('%',#{DevName},'%')
+		</if>
 	</select>
-	
-	<select id="getDevsAddressXY" parameterType="java.lang.String" resultMap="DevResultMap">
-		select * from device where City like CONCAT('%',#{cityName},'%')
+
+	<select id="getDevsAddressXY" parameterType="java.lang.String"
+		resultMap="DevResultMap">
+		select * from device where City like
+		CONCAT('%',#{cityName},'%')
 	</select>
-	
+
 </mapper>

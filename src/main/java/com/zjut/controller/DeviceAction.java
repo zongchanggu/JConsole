@@ -1,8 +1,10 @@
 package com.zjut.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +23,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContext;
 
+import com.zjut.pojo.Advertise;
+import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Device;
 import com.zjut.pojo.JsonDataInfo;
 import com.zjut.pojo.Page;
 import com.zjut.pojo.SearchEntity;
+import com.zjut.service.AdService;
 import com.zjut.service.DevService;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 /**
  * 
@@ -39,6 +47,12 @@ public class DeviceAction {
 
 	@Resource
 	private DevService devServiceImpl;
+	
+	@Resource
+	private AdService adServiceImpl;
+
+	@Resource
+	private JedisPool jedisPool;
 
 	@RequestMapping("getBaiduMap")
 	public String getBaiduMap() {
@@ -85,6 +99,43 @@ public class DeviceAction {
 	public String deleteDevsInfo(@RequestParam(value = "ids[]") int[] ids) {
 		devServiceImpl.deleteDevsInfo(ids);
 		return "success";
+	}
+
+	@RequestMapping("deliverAds")
+	@ResponseBody
+	public String deliverAds(@RequestParam(value = "ids[]") int[] ids) {
+		List<DevToAd> adForUpdate = new ArrayList<>();
+		Jedis jedis = jedisPool.getResource();
+		for (int i = 0; i < ids.length; i++) {
+			List<DevToAd> ads = devServiceImpl.getAdByDevID(ids[i]);
+			List<String> tmp =new ArrayList<>();
+			Iterator<DevToAd> it = ads.iterator();
+			int t = 0;
+			while (it.hasNext()) {
+				DevToAd ad = it.next();
+				if(ad.getAdStatus()==2){
+				    tmp.add(ad.toString());
+				    adForUpdate.add(ad);
+				    t++;
+				}
+			}
+			if (tmp.size() != 0 &&tmp!=null)
+				jedis.sadd("dev_" + ids[i], tmp.toArray(new String[tmp.size()]));
+		}
+		if(adForUpdate!=null && adForUpdate.size()!=0)
+		   updateAdsStatus(adForUpdate);
+		return "success";
+	}
+
+	private void updateAdsStatus(List<DevToAd> adForUpdate){
+		Iterator<DevToAd> it = adForUpdate.iterator();
+		while(it.hasNext()){
+			DevToAd ad = it.next();
+			adServiceImpl.updateAdStatus(ad.getAdID(),ad.getAdStatus()+1);
+		}
+	}
+	private void updateAdStatus(List<DevToAd> adForUpdate) {
+		adServiceImpl.updateAdStatusBatch(adForUpdate);
 	}
 
 	@RequestMapping("doSearchDev")

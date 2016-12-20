@@ -3,6 +3,7 @@ package com.zjut.service;
 import java.util.List;
 
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Device;
 import com.zjut.pojo.Page;
 import com.zjut.pojo.SearchEntity;
@@ -21,7 +22,7 @@ public interface DevService {
 
 	public List<Device> getDevInfo(Page p);
 
-	public List<Advertise> getAdByDevID(int dev_id);
+	public List<DevToAd> getAdByDevID(int dev_id);
 
 	public Device getDevDetail(int devID);
 

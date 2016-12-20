@@ -47,7 +47,7 @@ public class DevCheck {
 
 	@RequestMapping("putAds")
 	public String putAds(int dev_id) {
-		List<Advertise> ads = devServiceImpl.getAdByDevID(dev_id);
+//		List<Advertise> ads = devServiceImpl.getAdByDevID(dev_id);
 		return "index";
 	}
 }

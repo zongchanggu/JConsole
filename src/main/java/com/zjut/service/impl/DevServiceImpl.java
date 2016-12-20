@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.zjut.mapping.DevMapper;
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Device;
 import com.zjut.pojo.Page;
 import com.zjut.pojo.SearchEntity;
@@ -42,7 +43,7 @@ public class DevServiceImpl implements DevService {
 	}
 
 	@Override
-	public List<Advertise> getAdByDevID(int dev_id) {
+	public List<DevToAd> getAdByDevID(int dev_id) {
 		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
 		return devMapper.getAdByDevID(dev_id);
 	}
