@@ -18,4 +18,22 @@
 		<result column="ViewNum" property="ViewNum" />
 		<result column="Status" property="Status" />
 	</resultMap>
+
+	<update id="updateAdStatusBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			update advertise
+			<set>
+				Status=${item.AdStatus}+1
+			</set>
+			where AdID = ${item.AdID}
+		</foreach>
+	</update>
+	
+	<update id="updateAdStatus">
+	     update advertise
+	     <set>
+	         Status=#{1}
+	     </set>
+	     where AdID =#{0}
+	</update>
 </mapper>

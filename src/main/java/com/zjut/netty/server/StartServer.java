@@ -22,9 +22,9 @@ public class StartServer extends HttpServlet {
 	public void init() throws ServletException {
 		logger.info("init server ....");
 		Runnable task = new NettyServerThread(8888);
-		new Thread(task).start();
-		Runnable healthChktask = new NettyHealthChkServerThread(8889);
-		new Thread(healthChktask).start();
+//		new Thread(task).start();
+//		Runnable healthChktask = new NettyHealthChkServerThread(8889);
+//		new Thread(healthChktask).start();
 	}
 
 }

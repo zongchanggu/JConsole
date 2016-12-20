@@ -1,13 +1,17 @@
 package com.zjut.pojo;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * 
  * @author:zongchnaggu
  * @description:created by gu
  * @date:2016年12月16日 下午7:48:23
  */
-public class DevToAd {
+public class DevToAd implements Serializable {
 
+	private static final long serialVersionUID = -888001186043340664L;
 	private int ID;
 	private int DevID;
 	private int AdID;
@@ -15,8 +19,11 @@ public class DevToAd {
 	private int AdType;
 	private int AdStatus;
 	private int DevType;
-	private int DevStatus;
+	private String DevStatus;
 	private String DevName;
+	private Date StartTime;
+	private Date EndTime;
+	private String RealPath;
 
 	public int getID() {
 		return ID;
@@ -74,11 +81,11 @@ public class DevToAd {
 		DevType = devType;
 	}
 
-	public int getDevStatus() {
+	public String getDevStatus() {
 		return DevStatus;
 	}
 
-	public void setDevStatus(int devStatus) {
+	public void setDevStatus(String devStatus) {
 		DevStatus = devStatus;
 	}
 
@@ -88,6 +95,35 @@ public class DevToAd {
 
 	public void setDevName(String devName) {
 		DevName = devName;
+	}
+
+	public Date getStartTime() {
+		return StartTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		StartTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return EndTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		EndTime = endTime;
+	}
+
+	public String getRealPath() {
+		return RealPath;
+	}
+
+	public void setRealPath(String realPath) {
+		RealPath = realPath;
+	}
+
+	@Override
+	public String toString() {
+		return AdID + "," + AdType + "," + EndTime + "," + RealPath + "," + AdName;
 	}
 
 }

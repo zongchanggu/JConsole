@@ -23,7 +23,7 @@ public class Device implements Serializable {
 	private String DevName;
 	private int Type;
 	private Date DeployTime;
-	private int Status;
+	private String Status;
 	private String Province;
 	private String City;
 	private String District;
@@ -67,11 +67,11 @@ public class Device implements Serializable {
 		Type = type;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return Status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		Status = status;
 	}
 

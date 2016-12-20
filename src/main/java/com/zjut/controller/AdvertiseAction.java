@@ -39,9 +39,9 @@ public class AdvertiseAction {
 	@ResponseBody
 	public JsonDataInfo<Advertise> ajaxGetAdsJson(){
 		JsonDataInfo<Advertise> adsJson = new JsonDataInfo<Advertise>();
-		List<Advertise> ads = devServiceImpl.getAdByDevID(1);
-		adsJson.setRows(ads);
-		adsJson.setTotal(ads.size());
+//		List<Advertise> ads = devServiceImpl.getAdByDevID(1);
+//		adsJson.setRows(ads);
+//		adsJson.setTotal(ads.size());
 		return adsJson;
 	}
 	

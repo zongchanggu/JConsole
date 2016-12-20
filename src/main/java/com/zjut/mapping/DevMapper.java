@@ -3,6 +3,7 @@ package com.zjut.mapping;
 import java.util.List;
 
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Device;
 import com.zjut.pojo.Page;
 import com.zjut.pojo.SearchEntity;
@@ -15,7 +16,7 @@ import com.zjut.pojo.SearchEntity;
  */
 public interface DevMapper {
 
-	public List<Advertise> getAdByDevID(int dev_id);
+	public List<DevToAd> getAdByDevID(int dev_id);
 
 	public List<Integer> getDevIds();
 
@@ -30,5 +31,7 @@ public interface DevMapper {
 	public Integer getTotal();
 
 	public List<Device> searchDevInfoByCondition(SearchEntity entity);
+
+	public List<Device> getDevsAddressXY(String cityName);
 
 }

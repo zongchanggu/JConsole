@@ -79,6 +79,8 @@
 			<li><a
 				href="${pageContext.request.contextPath}/DevAction/getDevList.action"
 				target="right"><span class="icon-caret-right"></span>设备列表</a></li>
+			<li><a href="${pageContext.request.contextPath}/DevAction/getBaiduMap.action" target="right">
+					<span class="icon-caret-right"></span>设备选点</a></li>
 
 		</ul>
 	</div>

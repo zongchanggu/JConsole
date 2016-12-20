@@ -9,8 +9,9 @@ import java.util.Date;
  * @date:2016年12月13日 下午11:10:16
  */
 public class Advertise {
+
 	private int AdID;
-	private int Type;
+	private String Type;
 	private Date ResieterTime;
 	private Date StartTime;
 	private Date EndTime;
@@ -20,7 +21,7 @@ public class Advertise {
 	private String RealPath;
 	private String AdName;
 	private int ViewNum;
-	private int Status;
+	private String Status;
 
 	public int getAdID() {
 		return AdID;
@@ -30,11 +31,11 @@ public class Advertise {
 		AdID = adID;
 	}
 
-	public int getType() {
+	public String getType() {
 		return Type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		Type = type;
 	}
 
@@ -110,12 +111,20 @@ public class Advertise {
 		ViewNum = viewNum;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return Status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		Status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Advertise [AdID=" + AdID + ", Type=" + Type + ", ResieterTime=" + ResieterTime + ", StartTime="
+				+ StartTime + ", EndTime=" + EndTime + ", Duration=" + Duration + ", CurrentTime=" + CurrentTime
+				+ ", UploadPath=" + UploadPath + ", RealPath=" + RealPath + ", AdName=" + AdName + ", ViewNum="
+				+ ViewNum + ", Status=" + Status + "]";
 	}
 
 }

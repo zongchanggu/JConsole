@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.zjut.mapping.DevMapper;
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Device;
 import com.zjut.pojo.Page;
 import com.zjut.pojo.SearchEntity;
@@ -29,12 +30,6 @@ public class DevServiceImpl implements DevService {
 	}
 
 	@Override
-	public Device getDevInfoByAddress(String address) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Device getDevInfoByXY(String AddressXY) {
 		// TODO Auto-generated method stub
 		return null;
@@ -48,7 +43,7 @@ public class DevServiceImpl implements DevService {
 	}
 
 	@Override
-	public List<Advertise> getAdByDevID(int dev_id) {
+	public List<DevToAd> getAdByDevID(int dev_id) {
 		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
 		return devMapper.getAdByDevID(dev_id);
 	}
@@ -85,4 +80,10 @@ public class DevServiceImpl implements DevService {
 		return devs;
 	}
 
+	@Override
+	public List<Device> getDevsAddressXY(String cityName) {
+		DevMapper devMapper = sessionTemplate.getMapper(DevMapper.class);
+		List<Device> xys = devMapper.getDevsAddressXY(cityName);
+		return xys;
+	}
 }
