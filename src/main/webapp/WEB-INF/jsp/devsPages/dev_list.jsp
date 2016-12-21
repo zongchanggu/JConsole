@@ -34,7 +34,7 @@ $(function(){
 	function getDevDetailInfo(devID){
 		var query = parent.$;
 		var devDetail_dlg = query('#devDetail_dlg');
-		if (Detail_dlg.length == 0) {
+		if (devDetail_dlg.length == 0) {
 			query('<div id="devDetail_dlg"></div>').appendTo("body");
 		}
 		var mis_page = query('#devDetail_dlg');
@@ -58,7 +58,7 @@ $(function(){
 			data : {
 				devID : devID
 			},
-			url : '${pageContext.request.contextPath}/DevAction/DevDetail.action',
+			url : '${pageContext.request.contextPath}/DevAction/DevDetailAdRelated.action',
 			success : function(htm) {
 				mis_page.html(htm);
 				query.messager.progress('close');

@@ -92,9 +92,9 @@ public class DeviceAction {
 		return devsJson;
 	}
 
-	@RequestMapping(value = "DevDetail", method = { RequestMethod.POST })
+	@RequestMapping(value = "DevDetailAdRelated", method = { RequestMethod.POST })
 	@Log(operationType="select",operationName="获取设备详情关联广告")
-	public ModelAndView DevDetail(int devID, Model dev) {
+	public ModelAndView DevDetailAdRelated(int devID, Model dev) {
 		Device device = devServiceImpl.getDevDetail(devID);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/devsPages/dev_detail");
