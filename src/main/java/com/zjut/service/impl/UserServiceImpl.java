@@ -23,6 +23,15 @@ public class UserServiceImpl implements IUserService{
 		User result = userMapper.selectByPrimaryKey(userId);
 		return result;
 	}
+	
+	@Override
+	public User getUserByUsernameAndPas(String username, String password) {
+		// TODO Auto-generated method stub
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		User result = userMapper.getUserByUsernameAndPas(username, password);
+		return result;
+	}
+	
 	@Override
 	public List<User> getPageUserListByFL(int firstrow, int lastrow) {
 		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
@@ -45,5 +54,6 @@ public class UserServiceImpl implements IUserService{
 		List<User> result = userMapper.searchPageUserList(firstrow, lastrow, username, phone, usertype);
 		return result;
 	}
+	
 
 }
