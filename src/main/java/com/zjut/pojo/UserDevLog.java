@@ -1,6 +1,7 @@
 package com.zjut.pojo;
 
 import java.util.Date;
+
 /**
  * 
  * @author:zongchnaggu
@@ -14,9 +15,9 @@ public class UserDevLog {
 	private int UserID;
 	private String UserName;
 	private int DevID;
-	private String DevName;
-	private String Operation;
+	private String OperationType;
 	private Date CurrentTime;
+	private String OperationName;
 
 	public int getID() {
 		return ID;
@@ -50,20 +51,20 @@ public class UserDevLog {
 		DevID = devID;
 	}
 
-	public String getDevName() {
-		return DevName;
+	public String getOperationType() {
+		return OperationType;
 	}
 
-	public void setDevName(String devName) {
-		DevName = devName;
+	public void setOperationType(String operationType) {
+		OperationType = operationType;
 	}
 
-	public String getOperation() {
-		return Operation;
+	public String getOperationName() {
+		return OperationName;
 	}
 
-	public void setOperation(String operation) {
-		Operation = operation;
+	public void setOperationName(String operationName) {
+		OperationName = operationName;
 	}
 
 	public Date getCurrentTime() {
