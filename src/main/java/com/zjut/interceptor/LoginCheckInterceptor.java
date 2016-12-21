@@ -56,7 +56,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		// 2、TODO 比如退出、首页等页面无需登录，即此处要放行 允许游客的请求
 
 		// 3、如果用户已经登录 放行
-		if (request.getSession().getAttribute("username") != null) {
+		if (request.getSession().getAttribute("user") != null) {
 			// 更好的实现方式的使用cookie
 			return true;
 		}

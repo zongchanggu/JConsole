@@ -24,7 +24,7 @@
 		<div class="body-content" style="margin: 0px 10px;">
 			<div class="welcome-info">
 				<img src="${pageContext.request.contextPath}/images/admin/sun.png">
-				<span>您好：${sessionScope.username}，欢迎使用管理控制台</span>
+				<span>您好：${sessionScope.user.userName}，欢迎使用管理控制台</span>
 			</div>
 
 			<div class="welcome-info">
@@ -44,8 +44,8 @@
 				<table>
 					<tbody>
 						<tr>
-							<td>姓名：<span>${sessionScope.username}</span></td>
-							<td>手机：<span></span></td>
+							<td>用户名：<span>${sessionScope.user.userName}</span></td>
+							<td>手机：<span>${sessionScope.user.phone}</span></td>
 						</tr>
 					</tbody>
 				</table>

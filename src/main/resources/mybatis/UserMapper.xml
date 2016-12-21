@@ -28,6 +28,13 @@
 		from user, usertype
 		where user.Type=usertype.TypeID and UserID = #{0}
 	</select>
+	
+	<select id="getUserByUsernameAndPas" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user, usertype
+		where user.UserName = #{0} and user.PassWord = #{1} and user.Type=usertype.TypeID
+	</select>
 
 	<select id="getPageUserListByFL" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">

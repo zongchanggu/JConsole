@@ -22,6 +22,9 @@
 		<mvc:interceptor>
 			<!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
 			<mvc:mapping path="/adminAction/*.action" />
+			<mvc:mapping path="/AdsManage/*.action" />
+			<mvc:mapping path="/DevAction/*.action" />
+			<mvc:exclude-mapping path="/adminAction/logout.action"/>
 			<bean class="com.zjut.interceptor.LoginCheckInterceptor">
 			  <property name="loginUrl" value="/adminAction/loginPage"></property>
 			  <property name="loginActionUrl" value="/adminAction/login"></property>

@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
 <style type="text/css">
-body, html, #allmap {
+#allmap {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 	margin: 0;
 	font-family: "微软雅黑";
 }
@@ -33,9 +32,7 @@ body, html, #allmap {
 </head>
 <body>
 	<div id="allmap"></div>
-</body>
-</html>
-<script type="text/javascript">
+	<script type="text/javascript">
     function dataView(result){
     	$("input[name='devName']").value =result.devName;
     	var a = $("input[name='devName']").val();
@@ -45,10 +42,10 @@ body, html, #allmap {
 	var map = new BMap.Map("allmap");
 	var point = new BMap.Point(120.04325, 30.230856);
 	map.centerAndZoom(point, 13);
-	var name;
+	var name2;
 	function myFun(result) {
 		cityName = result.name;
-		name = cityName;
+		name2 = cityName;
 		map.setCenter(cityName);
 	}
 	var myCity = new BMap.LocalCity();
@@ -58,7 +55,7 @@ body, html, #allmap {
 		$.ajax({
 			url : '${pageContext.request.contextPath}/DevAction/getDevsAddressXY.action',
 			type : 'post',
-			data:{'name':name},
+			data:{'name':name2},
 			success : function(result) {
 				for(var i=0;i<result.length;i++){
 					var tmp = result[i];
@@ -87,3 +84,6 @@ body, html, #allmap {
 	    })
 	})
 </script>
+</body>
+</html>
+

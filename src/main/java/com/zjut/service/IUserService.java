@@ -7,6 +7,8 @@ import com.zjut.pojo.User;
 public interface IUserService {
     public User getUserById(int userId);
     
+    public User getUserByUsernameAndPas(String username, String password);
+    
     public List<User> getPageUserListByFL(int firstrow, int lastrow);
     
     public int getTotalNum();
