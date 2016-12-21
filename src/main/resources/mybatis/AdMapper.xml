@@ -2,11 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zjut.mapping.AdMapper">
 	<resultMap type="com.zjut.pojo.Advertise" id="AdResultMap">
-		<id column="ID" property="ID" />
-		<result column="AdID" property="AdID" />
-		<result column="DevID" property="DevID" />
-		<result column="UserID" property="UserID" />
-		<result column="Type" property="Type" />
+		<id column="AdID" property="AdID" />
+		<!-- <result column="Type" property="Type" /> -->
 		<result column="ResieterTime" property="ResieterTime" />
 		<result column="StartTime" property="StartTime" />
 		<result column="EndTime" property="EndTime" />
@@ -16,11 +13,37 @@
 		<result column="RealPath" property="RealPath" />
 		<result column="AdName" property="AdName" />
 		<result column="ViewNum" property="ViewNum" />
-		<result column="Status" property="Status" />
+		<!-- <result column="Status" property="Status" /> -->
+		<association property="Type" javaType="adType">
+			<id property="adTypeID" column="AdTypeID"></id>
+			<result property="comment" column="Comment"></result>
+		</association>
+		<association property="Status" javaType="adStatus">
+			<id property="adStatusID" column="StatusID"></id>
+			<result property="comment" column="Comment"></result>
+		</association>
 	</resultMap>
 
+	<sql id="Base_Column_List">
+		AdID, AdName, adtype.Comment, adstatus.Comment, StartTime, EndTime, UploadPath, ResieterTime, ViewNum
+	</sql>
+	
+	<select id="getPageAdListByFL" resultMap="AdResultMap"
+		parameterType="pageParam">
+		select
+		<include refid="Base_Column_List" />
+		from advertise, adtype, adstatus
+		where advertise.Type=adtype.AdTypeID and advertise.Status=adstatus.StatusID 
+		limit #{start},#{end}
+	</select>
+	
+	<select id="getTotalNum" resultType="java.lang.Integer">
+		select COUNT(*) from advertise
+	</select>
+
 	<update id="updateAdStatusBatch" parameterType="java.util.List">
-		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
 			update advertise
 			<set>
 				Status=${item.AdStatus}+1
@@ -28,12 +51,12 @@
 			where AdID = ${item.AdID}
 		</foreach>
 	</update>
-	
+
 	<update id="updateAdStatus">
-	     update advertise
-	     <set>
-	         Status=#{1}
-	     </set>
-	     where AdID =#{0}
+		update advertise
+		<set>
+			Status=#{1}
+		</set>
+		where AdID =#{0}
 	</update>
 </mapper>

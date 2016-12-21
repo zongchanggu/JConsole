@@ -2,6 +2,10 @@ package com.zjut.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * @author:zongchnaggu
@@ -11,7 +15,7 @@ import java.util.Date;
 public class Advertise {
 
 	private int AdID;
-	private String Type;
+	private AdType Type;
 	private Date ResieterTime;
 	private Date StartTime;
 	private Date EndTime;
@@ -21,7 +25,7 @@ public class Advertise {
 	private String RealPath;
 	private String AdName;
 	private int ViewNum;
-	private String Status;
+	private AdStatus Status;
 
 	public int getAdID() {
 		return AdID;
@@ -31,14 +35,16 @@ public class Advertise {
 		AdID = adID;
 	}
 
-	public String getType() {
+	public AdType getType() {
 		return Type;
 	}
 
-	public void setType(String type) {
+	public void setType(AdType type) {
 		Type = type;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getResieterTime() {
 		return ResieterTime;
 	}
@@ -47,6 +53,8 @@ public class Advertise {
 		ResieterTime = resieterTime;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getStartTime() {
 		return StartTime;
 	}
@@ -55,6 +63,8 @@ public class Advertise {
 		StartTime = startTime;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getEndTime() {
 		return EndTime;
 	}
@@ -71,6 +81,8 @@ public class Advertise {
 		Duration = duration;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getCurrentTime() {
 		return CurrentTime;
 	}
@@ -111,11 +123,11 @@ public class Advertise {
 		ViewNum = viewNum;
 	}
 
-	public String getStatus() {
+	public AdStatus getStatus() {
 		return Status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(AdStatus status) {
 		Status = status;
 	}
 

@@ -25,12 +25,12 @@
 				<table>
 					<tbody>
 						<tr>
-							<td>姓名：<span>${user.userName}</span></td>
-							<td>手机：<span>${user.phone}</span></td>
+							<td>姓名：<span>${userDetail.userName}</span></td>
+							<td>手机：<span>${userDetail.phone}</span></td>
 						</tr>
 						<tr>
-							<td>注册时间：<span>${user.currentTime}</span></td>
-							<td>用户类型：<span>${user.type.comment}</span></td>
+							<td>注册时间：<span>${userDetail.currentTime}</span></td>
+							<td>用户类型：<span>${userDetail.type.comment}</span></td>
 						</tr>
 					</tbody>
 				</table>

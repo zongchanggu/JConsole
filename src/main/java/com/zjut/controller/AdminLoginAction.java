@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zjut.pojo.User;
 import com.zjut.service.IUserService;
-import com.zjut.service.impl.UserServiceImpl;
 import com.zjut.util.Md5Utils;
 
 /**
