@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zjut.mapping.AdMapper;
+import com.zjut.pojo.Advertise;
 import com.zjut.pojo.DevToAd;
+import com.zjut.pojo.Page;
 import com.zjut.service.AdService;
 /**
  * 
@@ -32,6 +34,21 @@ public class AdServiceImpl implements AdService {
 	public void updateAdStatus(int AdId, int status) {
 		AdMapper mapper = sessionTemplate.getMapper(AdMapper.class);
 		mapper.updateAdStatus(AdId, status);
+	}
+
+	@Override
+	public List<Advertise> getPageAdListByFL(Page p) {
+		AdMapper mapper = sessionTemplate.getMapper(AdMapper.class);
+		List<Advertise> result = mapper.getPageAdListByFL(p);
+		return result;
+	}
+
+	@Override
+	public int getTotalNum() {
+		// TODO Auto-generated method stub
+		AdMapper mapper = sessionTemplate.getMapper(AdMapper.class);
+		int result = mapper.getTotalNum();
+		return result;
 	}
 
 }

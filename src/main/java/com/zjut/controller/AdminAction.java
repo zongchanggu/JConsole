@@ -115,9 +115,9 @@ public class AdminAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/getUserDetail", method = { RequestMethod.POST })
-	public ModelAndView getUserDetail(int id, Model user) {
+	public ModelAndView getUserDetail(int id, Model userDetail) {
 		User userInfo = userServiceImpl.getUserById(id);
-		user.addAttribute(userInfo);
+		userDetail.addAttribute("userDetail", userInfo);
 		ModelAndView mView = new ModelAndView();
 		String viewName = "/adminPages/userDetail";
 		mView.setViewName(viewName);

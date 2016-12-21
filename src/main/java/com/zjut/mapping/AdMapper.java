@@ -2,7 +2,9 @@ package com.zjut.mapping;
 
 import java.util.List;
 
+import com.zjut.pojo.Advertise;
 import com.zjut.pojo.DevToAd;
+import com.zjut.pojo.Page;
 
 /**
  * 
@@ -15,5 +17,9 @@ public interface AdMapper {
 	public void updateAdStatusBatch(List<DevToAd> adForUpdate);
 	
 	public void updateAdStatus(int AdID,int status);
+	
+	public List<Advertise> getPageAdListByFL(Page p);
+	
+	public int getTotalNum();
 
 }

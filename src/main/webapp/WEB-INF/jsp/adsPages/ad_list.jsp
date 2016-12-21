@@ -25,9 +25,9 @@
 <body>
 	<div class="mypanel admin-panel">
 		<div class="panel-head">
-			<strong style="font-weight: bold;"><span class="fa fa-user"></span>&nbsp;&nbsp;广告列表</strong>
+			<strong style="font-weight: bold;"><span class="fa fa-buysellads"></span>&nbsp;&nbsp;广告列表</strong>
 		</div>
-		<table id="AdList" class="easyui-datagrid"
+		<table id="adList_tab" class="easyui-datagrid"
 			style="width: 100%; height: 88%;" toolbar="#tb" rownumbers="true"
 			pagination="true"
 			data-options="emptyMsg: '无记录',singleSelect:true,url:'getAdsList.action',method:'get',striped: true,">
@@ -35,20 +35,18 @@
 				<tr>
 					<th field="adID" align="center" hidden="true">AdID</th>
 					<th field="adName" width="10%" align="center">广告名</th>
-					<th field="type" width="10%" align="center">广告类型</th>
-					<th field="status" width="15%" align="center">当前状态</th>
-					<th field="startTime" width="15%" align="center"
-						data-options="formatter:function(value, row, index){
-						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">开始时间</th>
-					<th field="endTime" width="15%" align="center"
-						data-options="formatter:function(value, row, index){
-						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">结束时间</th>
-					<th field="uploadPath" width="15%" align="center">上传路径</th>
-					<th field="resieterTime" width="15%" align="center"
-						data-options="formatter:function(value, row, index){
-						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">注册时间</th>
+					<th field="type" width="10%" align="center" data-options="formatter:function(value, row, index){
+					return value.comment}">广告类型</th>
+					<th field="status" width="15%" align="center" data-options="formatter:function(value, row, index){
+					return value.comment}">当前状态</th>
+					<th field="startTime" width="15%" align="center">开始时间</th>
+					<th field="endTime" width="15%" align="center">结束时间</th>
 					
-					<th field="viewNum" width="5%" align="center">查看次数</th>
+					<th field="resieterTime" width="15%" align="center">注册时间</th>
+					
+					<th field="viewNum" width="10%" align="center">查看次数</th>
+					<th field="operator" width="10%" align="center"
+					formatter="javascript:operationFormat">操作</th>
 				</tr>
 			</thead>
 		</table>
@@ -57,7 +55,7 @@
 				<div class="search-toolbar-content">
 					<div class="search-toolbar-key">&nbsp;广告名：</div>
 					<input type="text" id="adName" class="input-sm form-control"
-						placeholder="username">
+						placeholder="adName">
 				</div>
 			</div>
 			<div class="search-toolbar" style="margin-left: 3px; width: auto;">
@@ -79,9 +77,9 @@
 					<select id="adtype" class="easyui-combobox" panelHeight="auto"
 						style="height: 30px; vertical-align: middle;">
 						<option value="">--广告类型--</option>
-						<option value="图片广告">图片广告</option>
-						<option value="多图广告">多图广告</option>
-						<option value="视频广告">视频广告</option>
+						<option value="图片">图片广告</option>
+						<option value="视频">多图广告</option>
+						<option value="文本">视频广告</option>
 					</select>
 				</div>
 				&nbsp; <a class="btn btn-sm btn-default" href="#" role="button"
@@ -90,7 +88,66 @@
 					onclick="doCheck()" style="vertical-align: middle; height: 32px;">设备检测</a>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+			function doSearch() {
+				var adName = $('#adName').val();
+				var dateStart = $('#dateStart').val();
+				var dateEnd = $('#dateEnd').val();
+				var adtype = $('#adtype').val();
+				$('#adList_tab').datagrid('load', {
+					adName : adName,
+					dateStart : dateStart,
+					dateEnd : dateEnd,
+					adtype : adtype
+				});
+			};
+			function operationFormat(val, row, index) {
+				return '<a href="javascript:getAdInfo(' + row.adID
+						+ ')">查看</a>'
+			};
 
+			function getUserInfo(id) {
+				var query = parent.$;
+				var userDetail_dlg = query('#userDetail_dlg');
+				if (userDetail_dlg.length == 0) {
+					query('<div id="userDetail_dlg"></div>').appendTo("body");
+				}
+				var mis_page = query('#userDetail_dlg');
+				mis_page.dialog({
+					shadow : true,
+					closed : true,
+					maximizable : true,
+					collapsible : false,
+					title : '用户详情',
+					width : '70%',
+					height : 520,
+					modal : true,
+					show : 'slide',
+				});
+				query.messager.progress({
+					title : '请等待...',
+					msg : '加载中...'
+				});
+				query.ajax({
+					type : "POST",
+					data : {
+						id : id
+					},
+					url : 'getUserDetail.action',
+					success : function(htm) {
+						mis_page.html(htm);
+						query.parser.parse(mis_page);
+						query.messager.progress('close');
+						mis_page.dialog('open');
+					},
+					error : function() {
+						query.messager.progress('close');
+						query.messager.alert('提示', '请求失败', 'error');
+					}
+				});
+			};
+		</script>
 
 	</div>
 </body>
