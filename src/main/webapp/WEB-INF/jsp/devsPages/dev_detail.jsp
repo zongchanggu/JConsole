@@ -5,16 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户详情页</title>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/formatterJs/common.js"></script>
-</head>
-<title>用户信息</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/pintuer.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin.css">
-<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/admin.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/gray/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/formatterJs/common.js"></script>
 <script type="text/javascript">
 	function operationFormat(val, row, index) {
 		return '<a href="javascript:getAdInfo(' + row.adID + ')">详情</a>'
@@ -68,7 +65,7 @@
 			</div>
 
 			<table id="userlist_tab" class="easyui-datagrid"
-				style="width: 100%; height: 220px;" rownumbers="true"
+				style="width: 98%; height: 220px;" rownumbers="true"
 				data-options="nowrap:true, emptyMsg: '无记录',url:'../AdsManage/getAdsList.action',method:'get',singleSelect:true,striped: true">
 				<thead>
 					<tr>
