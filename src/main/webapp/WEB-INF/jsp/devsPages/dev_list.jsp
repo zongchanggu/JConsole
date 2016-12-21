@@ -28,7 +28,47 @@ $(function(){
 	});
 })
 	function operationFormat(val, row, index) {
-		return '<a href="DevDetail.action?id=' + row.devID + '">查看</a>'
+	return '<a href="javascript:getDevDetailInfo(' + row.devID
+	+ ')">查看</a>'
+	}
+	function getDevDetailInfo(devID){
+		var query = parent.$;
+		var devDetail_dlg = query('#devDetail_dlg');
+		if (devDetail_dlg.length == 0) {
+			query('<div id="devDetail_dlg"></div>').appendTo("body");
+		}
+		var mis_page = query('#devDetail_dlg');
+		mis_page.dialog({
+			shadow: true,
+			closed: true,
+			maximizable: true,
+			collapsible: false,
+			title : '设备详情',
+			width : '70%',
+			height : 520,
+			modal : true,
+			show: 'slide',
+		});
+	 	query.messager.progress({
+			title:'请等待...',
+			msg : '加载中...'
+		}); 
+		query.ajax({
+			type : "POST",
+			data : {
+				devID : devID
+			},
+			url : '${pageContext.request.contextPath}/DevAction/DevDetailAdRelated.action',
+			success : function(htm) {
+				mis_page.html(htm);
+				query.messager.progress('close');
+				mis_page.dialog('open'); 
+			},
+			error : function() {
+				query.messager.progress('close');
+				query.messager.alert('提示', '请求失败', 'error');
+			}
+		});
 	}
 
 	function doAdd() {
@@ -216,7 +256,7 @@ $(function(){
 					<th field="currentTime" width="15%" align="center"
 						data-options="formatter:function(value, row, index){
 						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">CurrentTime</th>
-					<th field="operator" formatter="operationFormat">修改</th>
+					<th field="operator" formatter="operationFormat">详情</th>
 				</tr>
 			</thead>
 		</table>
@@ -232,11 +272,13 @@ $(function(){
 				To: <input id="dateEnd" class="easyui-datetimebox" style="width: 80px">
 				Status: <select id="status" class="easyui-combobox" panelHeight="auto"
 					style="width: 100px">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
+					<option value="0">正常</option>
+					<option value="1">待审核</option>
+					<option value="2">待投放</option>
+					<option value="3">无广告投放</option>
+					<option value="4">设备已下架</option>
+					<option value="5">红外故障</option>
+					<option value="6">undefined</option>
 				</select>
 				DevName <input id="name" class="easyui-textbox"></input> 
 				<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="doSearch()">Search</a>

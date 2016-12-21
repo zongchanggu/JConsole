@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjut.mapping.UserDevMapper">
+
+   <resultMap type="com.zjut.pojo.UserDevLog" id="userDevLog">
+       <id column="ID" property="ID"/>
+       <result column="UserID" property="UserID"/>
+       <result column="UserName" property="UserName"/>
+       <result column="DevID" property="DevID"/>
+       <result column="OperationType" property="OperationType"/>
+       <result column="OperationName" property="OperationName"/>
+       <result column="CurrentTime" property="CurrentTime"/>
+   </resultMap>
+
+    <sql id="fields">
+         ID,UserID,UserName,DevID,OperationType,OperationName,CurrentTime
+    </sql>
+	<insert id="insertOperateName" parameterType="com.zjut.pojo.UserDevLog"
+		useGeneratedKeys="true" keyProperty="ID">
+		insert into
+		userdevlog(<include refid="fields"/>)
+		values(#{UserID},#{UserName},#{DevID},#{OperationType},#{OperationName},NOW()
+	</insert>
+</mapper>
