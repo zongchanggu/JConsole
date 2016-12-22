@@ -14,9 +14,11 @@ import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Device;
 import com.zjut.pojo.JsonDataInfo;
 import com.zjut.pojo.Page;
+import com.zjut.pojo.UserToAd;
 import com.zjut.service.AdService;
 import com.zjut.service.DevService;
 import com.zjut.service.DevToAdService;
+import com.zjut.service.UserToAdService;
 
 import redis.clients.jedis.JedisPool;
 
@@ -35,7 +37,10 @@ public class AdvertiseAction {
 	private AdService adServiceImpl;
 	@Resource
 	private DevToAdService devToAdServiceImpl;
-
+	@Resource
+	private UserToAdService userToAdServiceImpl;
+	
+	
 	@RequestMapping("getList")
 	public String getAdList() {
 		String viewName = "/adsPages/ad_list";
@@ -53,15 +58,19 @@ public class AdvertiseAction {
 	 * @param adtype
 	 * @return
 	 */
-	@RequestMapping("getAdsList1")
+	@RequestMapping("getUserToAdsList")
 	@ResponseBody
-	public JsonDataInfo<Advertise> ajaxGetAdsJson(int id,int page, int rows) {
+	public JsonDataInfo<Advertise> getUserToAdsList(int id,int page, int rows) {
 		JsonDataInfo<Advertise> adsJson = new JsonDataInfo<Advertise>();
 		Page p = new Page();
 		p.setStart((page - 1) * rows);
 		p.setEnd(page * rows);
 		p.setReserve(id);
-		List<Advertise> advertises;
+		List<UserToAd> utas = userToAdServiceImpl.getAdsByUserId(p);
+		List<Advertise> ads = utas.get(0).getAds();
+		adsJson.setRows(ads);
+		int num = userToAdServiceImpl.getTotalNum(id);
+		adsJson.setTotal(num);
 		return adsJson;
 	}
 

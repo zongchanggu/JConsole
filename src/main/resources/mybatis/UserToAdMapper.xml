@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjut.mapping.UserToAdMapper">
+	<resultMap type="com.zjut.pojo.UserToAd" id="UserToAdResultMap">
+		<id column="UserID" property="userID" />
+		<result column="UserName" property="userName" />
+		<collection property="ads" ofType="com.zjut.pojo.Advertise">
+			<id column="AdID" property="AdID" />
+			<!-- <result column="Type" property="Type" /> -->
+			<result column="ResieterTime" property="ResieterTime" />
+			<result column="StartTime" property="StartTime" />
+			<result column="EndTime" property="EndTime" />
+			<result column="Duration" property="Duration" />
+			<result column="CurrentTime" property="CurrentTime" />
+			<result column="UploadPath" property="UploadPath" />
+			<result column="RealPath" property="RealPath" />
+			<result column="AdName" property="AdName" />
+			<result column="ViewNum" property="ViewNum" />
+			<!-- <result column="Status" property="Status" /> -->
+			<association property="Type" javaType="adType">
+				<id property="adTypeID" column="AdTypeID"></id>
+				<result property="comment" column="Comment"></result>
+			</association>
+			<association property="Status" javaType="adStatus">
+				<id property="adStatusID" column="StatusID"></id>
+				<result property="comment" column="Comment"></result>
+			</association>
+		</collection>
+	</resultMap>
+
+	<select id="getAdsByUserId" resultMap="UserToAdResultMap"
+		parameterType="pageParam">
+		select u.UserID,u.UserName,ad.* from user u,usertoad ua,advertise ad
+		where u.UserID=#{reserve} and ua.AdID=ad.AdID
+	</select>
+	
+	<select id="getTotalNum" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select count(*) from usertoad where UserID=#{userID}
+	</select>
+
+</mapper>
