@@ -28,5 +28,6 @@
 		<mapper resource="mybatis/DevMapper.xml" />
 		<mapper resource="mybatis/AdMapper.xml" />
 		<mapper resource="mybatis/UserDevMapper.xml" />
+		<mapper resource="mybatis/DevToAdMapper.xml"/>
 	</mappers>
 </configuration>

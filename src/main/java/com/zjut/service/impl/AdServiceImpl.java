@@ -8,10 +8,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zjut.mapping.AdMapper;
+import com.zjut.mapping.DevToAdMapper;
 import com.zjut.pojo.Advertise;
 import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Page;
 import com.zjut.service.AdService;
+
 /**
  * 
  * @author:zongchnaggu
@@ -49,6 +51,13 @@ public class AdServiceImpl implements AdService {
 		AdMapper mapper = sessionTemplate.getMapper(AdMapper.class);
 		int result = mapper.getTotalNum();
 		return result;
+	}
+
+	@Override
+	public List<DevToAd> getAdsByDevID(Page p) {
+		DevToAdMapper mapper = sessionTemplate.getMapper(DevToAdMapper.class);
+		List<DevToAd> dtas = mapper.getAdsByDevID(p);
+		return dtas;
 	}
 
 }

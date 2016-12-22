@@ -10,6 +10,7 @@ public class Page {
 
 	private int start;
 	private int end;
+	private int reserve;
 
 	public int getStart() {
 		return start;
@@ -25,6 +26,14 @@ public class Page {
 
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	public int getReserve() {
+		return reserve;
+	}
+
+	public void setReserve(int reserve) {
+		this.reserve = reserve;
 	}
 
 }

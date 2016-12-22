@@ -3,6 +3,10 @@ package com.zjut.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * @author:zongchnaggu
@@ -97,6 +101,8 @@ public class DevToAd implements Serializable {
 		DevName = devName;
 	}
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getStartTime() {
 		return StartTime;
 	}
@@ -105,6 +111,8 @@ public class DevToAd implements Serializable {
 		StartTime = startTime;
 	}
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getEndTime() {
 		return EndTime;
 	}

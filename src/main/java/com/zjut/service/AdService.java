@@ -20,5 +20,7 @@ public interface AdService {
 	public List<Advertise> getPageAdListByFL(Page p);
 	
 	public int getTotalNum();
+	
+	public List<DevToAd> getAdsByDevID(Page p);
 
 }

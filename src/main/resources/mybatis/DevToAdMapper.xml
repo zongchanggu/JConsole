@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjut.mapping.DevToAdMapper">
+	<resultMap type="com.zjut.pojo.DevToAd" id="DTAResultMap">
+		<id column="ID" property="ID"/>
+		<result column="DevID" property="DevID" />
+		<result column="AdID" property="AdID" />
+		<result column="DevName" property="DevName" />
+		<result column="AdName" property="AdName" />
+		<result column="DevType" property="DevType" />
+		<result column="DevStatus" property="DevStatus" />
+		<result column="AdStatus" property="AdStatus" />
+		<result column="StartTime" property="StartTime" />
+		<result column="EndTime" property="EndTime" />
+		<result column="RealPath" property="RealPath" />
+		<result column="AdType" property="AdType"/>
+	</resultMap>
+	<sql id="fields">
+	    AdID,AdName,AdStatus,AdType,StartTime,EndTime,RealPath
+	</sql>
+	<select id="getAdsByDevID" resultMap="DTAResultMap" parameterType="pageParam">
+		select <include refid="fields"/>
+		from  devtoad where DevID=#{reserve}
+		limit #{start},#{end}
+	</select>
+	
+	<select id="getTotalNum" resultType="java.lang.Integer">
+		select count(*) from devtoad
+	</select>
+</mapper>

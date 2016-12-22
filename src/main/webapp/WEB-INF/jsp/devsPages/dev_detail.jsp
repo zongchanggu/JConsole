@@ -5,13 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户详情页</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/gray/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css"/>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/formatterJs/common.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/easyui/themes/gray/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/common.css" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/formatterJs/common.js"></script>
 <script type="text/javascript">
 	function operationFormat(val, row, index) {
 		return '<a href="javascript:getAdInfo(' + row.adID + ')">详情</a>'
@@ -61,23 +68,22 @@
 			style="border-radius: 4px 4px 4px 4px; border: solid 1px #ddd; padding: 5px; margin-top: 20px;">
 			<div class="welcome-info">
 				<img src="${pageContext.request.contextPath}/images/admin/ads.png">
-				<span>广告信息</span>
+				<span>广告信息</spanadType>
 			</div>
 
 			<table id="userlist_tab" class="easyui-datagrid"
 				style="width: 98%; height: 220px;" rownumbers="true"
-				data-options="nowrap:true, emptyMsg: '无记录',url:'../AdsManage/getAdsList.action',method:'get',singleSelect:true,striped: true">
+				pagination="true"
+				data-options="url:'${pageContext.request.contextPath}/AdsManage/getAdsList.action?id='+${dev.devID},method:'get',striped: true">
 				<thead>
 					<tr>
-						<th field="adID" align="center" hidden="true"></th>
+						<th field="adID" align="center" >广告ID</th>
 						<th field="adName" width="20%" align="center">广告名称</th>
-						<th field="startTime" width="20%" align="center"
-							data-options="formatter:function(value, row, index){
-						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">开始时间</th>
-						<th field="endTime" width="20%" align="center"
-							data-options="formatter:function(value, row, index){
-						var FormatterDate = new Date(value);return FormatterDate.Format('yyyy-MM-dd hh:mm:ss');}">结束时间</th>
-						<th field="type" width="20%" align="center">广告类型</th>
+						<th field="duration" width="5%" align="center">时长</th>
+						<th field="startTime" width="20%" align="center" data-options="">开始时间</th>
+						<th field="endTime" width="20%" align="center" data-options="">结束时间</th>
+						<th field="adStatus" width="5%" align="center">状态</th>
+						<th field="adType" width="5%" align="center">类型</th>
 						<th field="operator" width="20%" align="center"
 							formatter="javascript:operationFormat">操作</th>
 					</tr>

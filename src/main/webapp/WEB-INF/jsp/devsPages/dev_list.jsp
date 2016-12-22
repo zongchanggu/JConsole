@@ -7,31 +7,31 @@
 <title>设备列表</title>
 <jsp:include page="../common.jsp" />
 <script type="text/javascript">
-$(function(){
-	$('#addWindow').window({
-	    title: '添加设备',
-	    width: 700,
-	    modal: true,
-	    shadow: true,
-	    closed: true,
-	    height: 300,
-	    resizable:true,
-	    onClose:function(){
-	    	$('#addWindow').form('clear');
-	    }
-	});
-	$("#btnReset").click(function(){
-		$('#addWindow').form('clear');
-	});
-	$('#addForm').submit(function(){
-            $('#addWindow').window('close');
-	});
-})
+	$(function() {
+		$('#addWindow').window({
+			title : '添加设备',
+			width : 700,
+			modal : true,
+			shadow : true,
+			closed : true,
+			height : 300,
+			resizable : true,
+			onClose : function() {
+				$('#addWindow').form('clear');
+			}
+		});
+		$("#btnReset").click(function() {
+			$('#addWindow').form('clear');
+		});
+		$('#addForm').submit(function() {
+			$('#addWindow').window('close');
+		});
+	})
 	function operationFormat(val, row, index) {
-	return '<a href="javascript:getDevDetailInfo(' + row.devID
-	+ ')">查看</a>'
+		return '<a href="javascript:getDevDetailInfo(' + row.devID
+				+ ')">查看</a>'
 	}
-	function getDevDetailInfo(devID){
+	function getDevDetailInfo(devID) {
 		var query = parent.$;
 		var devDetail_dlg = query('#devDetail_dlg');
 		if (devDetail_dlg.length == 0) {
@@ -39,196 +39,214 @@ $(function(){
 		}
 		var mis_page = query('#devDetail_dlg');
 		mis_page.dialog({
-			shadow: true,
-			closed: true,
-			maximizable: true,
-			collapsible: false,
+			shadow : true,
+			closed : true,
+			maximizable : true,
+			collapsible : false,
 			title : '设备详情',
 			width : '70%',
 			height : 520,
 			modal : true,
-			show: 'slide',
+			show : 'slide',
 		});
-	 	query.messager.progress({
-			title:'请等待...',
+		query.messager.progress({
+			title : '请等待...',
 			msg : '加载中...'
-		}); 
-		query.ajax({
-			type : "POST",
-			data : {
-				devID : devID
-			},
-			url : '${pageContext.request.contextPath}/DevAction/DevDetailAdRelated.action',
-			success : function(htm) {
-				mis_page.html(htm);
-				query.messager.progress('close');
-				mis_page.dialog('open'); 
-			},
-			error : function() {
-				query.messager.progress('close');
-				query.messager.alert('提示', '请求失败', 'error');
-			}
 		});
+		query
+				.ajax({
+					type : "POST",
+					data : {
+						devID : devID
+					},
+					url : '${pageContext.request.contextPath}/DevAction/DevDetailAdRelated.action',
+					success : function(htm) {
+						mis_page.html(htm);
+						query.messager.progress('close');
+						mis_page.dialog('open');
+					},
+					error : function() {
+						query.messager.progress('close');
+						query.messager.alert('提示', '请求失败', 'error');
+					}
+				});
 	}
 
 	function doAdd() {
-		$('#addWindow').window('open'); 
+		$('#addWindow').window('open');
 	}
-	function editAd(){
+	function editAd() {
 		var item = $('#AdList').datagrid('getSelections');
-		if(item.length != 1)
+		if (item.length != 1)
 			alert("please select one row");
-		else{
+		else {
 			var row = $('#AdList').datagrid('getSelected')
-			$('#addForm').form('load','${pageContext.request.contextPath}/DevAction/DevDetail.action?devID='+row['devID']);
+			$('#addForm').form(
+					'load',
+					'${pageContext.request.contextPath}/DevAction/DevDetail.action?devID='
+							+ row['devID']);
 			$('#addWindow').window('open');
 		}
 	}
-    function deleteAd(){
-    	var item = $('#AdList').datagrid('getSelections');
-    	if(item.length < 1){
-    		$.messager.show({
-				title:'提示',
-				msg:'请先选择资源记录，再进行删除！'
+	function deleteAd() {
+		var item = $('#AdList').datagrid('getSelections');
+		if (item.length < 1) {
+			$.messager.show({
+				title : '提示',
+				msg : '请先选择资源记录，再进行删除！'
 			});
-    	}
-    	else{
-    		var ids=new Array();
-        	for(var i =0 ;i<item.length;i++)
-        		ids.push(item[i].devID);
-    		$.messager.confirm({
-    			title: 'Delete info',
-    			msg: '确定删除设备信息吗？',
-    			fn: function(r){
-    				if (r){
-    					$.ajax({
-    						url:'${pageContext.request.contextPath}/DevAction/deleteDevsInfo.action',
-    						data:{ids:ids},
-    						type:'Post',
-    						success:function(result){
-    							$('#AdList').datagrid('reload');
-    							$('#AdList').datagrid('uncheckAll');
-    							if(result != null){
-    								$.messager.show({
-    									title:'Delete result',
-    									msg:'删除成功',
-    									timeout:1000,
-    									showType:'slide'
-    								});
-    							}
-    						}
-    					})
-    				}
-    			}
-    		});
-    	}		
-    }	
-	function submitForm(){
-		$('#addForm').form('submit',{
-			url:'${pageContext.request.contextPath}/DevAction/insertDevInfo.action',
-			onSubmit:function(){
-				var isValid = $(this).form('validate');
-				if(!isValid){
-					alert("validate failed..");
-				}
-				return isValid;
-			},
-			success:function(data){
-				 if (data!= null) { 
-			       $.messager.show({ 
-			              title: '提示消息', 
-			              msg: '提交成功', 
-			              showType: 'show', 
-			              timeout: 1000, 
-			              style: { 
-			                right: '', 
-			                bottom: ''
-			              } 
-			            }); 
-			            $('#AdList').datagrid('reload');
-			            $('#addWindow').window('close');
-			          } 
-			          else { 
-			            $.messager.alert('提示信息', '提交失败，请联系管理员！', 'warning'); 
-			        } 
-			}
-		});
+		} else {
+			var ids = new Array();
+			for (var i = 0; i < item.length; i++)
+				ids.push(item[i].devID);
+			$.messager
+					.confirm({
+						title : 'Delete info',
+						msg : '确定删除设备信息吗？',
+						fn : function(r) {
+							if (r) {
+								$
+										.ajax({
+											url : '${pageContext.request.contextPath}/DevAction/deleteDevsInfo.action',
+											data : {
+												ids : ids
+											},
+											type : 'Post',
+											success : function(result) {
+												$('#AdList').datagrid('reload');
+												$('#AdList').datagrid(
+														'uncheckAll');
+												if (result != null) {
+													$.messager
+															.show({
+																title : 'Delete result',
+																msg : '删除成功',
+																timeout : 1000,
+																showType : 'slide'
+															});
+												}
+											}
+										})
+							}
+						}
+					});
+		}
 	}
-	
-	function clearForm(){
+	function submitForm() {
+		$('#addForm')
+				.form(
+						'submit',
+						{
+							url : '${pageContext.request.contextPath}/DevAction/insertDevInfo.action',
+							onSubmit : function() {
+								var isValid = $(this).form('validate');
+								if (!isValid) {
+									alert("validate failed..");
+								}
+								return isValid;
+							},
+							success : function(data) {
+								if (data != null) {
+									$.messager.show({
+										title : '提示消息',
+										msg : '提交成功',
+										showType : 'show',
+										timeout : 1000,
+										style : {
+											right : '',
+											bottom : ''
+										}
+									});
+									$('#AdList').datagrid('reload');
+									$('#addWindow').window('close');
+								} else {
+									$.messager.alert('提示信息', '提交失败，请联系管理员！',
+											'warning');
+								}
+							}
+						});
+	}
+
+	function clearForm() {
 		$('#addForm').form('clear');
 	}
 	function doSearch() {
 		var startTime = $("#dateStart").val();
 		var endTime = $("#dateEnd").val();
-		var status =$("#status").val();
+		var status = $("#status").val();
 		var name = $("#name").val();
-		var entity ={};
-		entity.startTime=startTime;
-		entity.endTime=endTime;
-		entity.status=status;
-		entity.DevName=name;
-		$.ajax({
-					url:'${pageContext.request.contextPath}/DevAction/doSearchDev.action',
-					type:'POST',
-					dataType:'json',
-					data:entity,
-					success:function(result) {
-						if(result!=null){
-							 $.messager.show({ 
-					              title: '提示消息', 
-					              msg: '搜索', 
-					              showType: 'show', 
-					              timeout: 1000, 
-					              style: { 
-					                right: '', 
-					                bottom: ''
-					              } 
-					            }); 
-							 $('#AdList').datagrid('loadData',result);
+		var entity = {};
+		entity.startTime = startTime;
+		entity.endTime = endTime;
+		entity.status = status;
+		entity.DevName = name;
+		$
+				.ajax({
+					url : '${pageContext.request.contextPath}/DevAction/doSearchDev.action',
+					type : 'POST',
+					dataType : 'json',
+					data : entity,
+					success : function(result) {
+						if (result != null) {
+							$.messager.show({
+								title : '提示消息',
+								msg : '搜索',
+								showType : 'show',
+								timeout : 1000,
+								style : {
+									right : '',
+									bottom : ''
+								}
+							});
+							$('#AdList').datagrid('loadData', result);
 						}
 					}
 				})
 	}
-	function doDeliver(){
-    	var item = $('#AdList').datagrid('getSelections');
-    	if(item.length < 1){
-    		$.messager.show({
-				title:'Warning',
-				msg:'请选好待投放设备！'
+	function doDeliver() {
+		var item = $('#AdList').datagrid('getSelections');
+		if (item.length < 1) {
+			$.messager.show({
+				title : 'Warning',
+				msg : '请选好待投放设备！'
 			});
-    	}
-    	else{
-    		var ids=new Array();
-        	for(var i =0 ;i<item.length;i++)
-        		ids.push(item[i].devID);
-    		$.messager.confirm({
-    			title: 'Delete info',
-    			msg: '确定投放？',
-    			fn: function(r){
-    				if (r){
-    					$.ajax({
-    						url:'${pageContext.request.contextPath}/DevAction/deliverAds.action',
-    						data:{ids:ids},
-    						type:'Post',
-    						success:function(result){
-    							$('#AdList').datagrid('reload');
-    							$('#AdList').datagrid('uncheckAll');
-    							if(result != null){
-    								$.messager.show({
-    									title:'Delete result',
-    									msg:'投放成功',
-    									timeout:1000,
-    									showType:'slide'
-    								});
-    							}
-    						}
-    					})
-    				}
-    			}
-    		});
-    	}		
-		
+		} else {
+			var ids = new Array();
+			for (var i = 0; i < item.length; i++)
+				ids.push(item[i].devID);
+			$.messager
+					.confirm({
+						title : 'Delete info',
+						msg : '确定投放？',
+						fn : function(r) {
+							if (r) {
+								$
+										.ajax({
+											url : '${pageContext.request.contextPath}/DevAction/deliverAds.action',
+											data : {
+												ids : ids
+											},
+											type : 'Post',
+											success : function(result) {
+												$('#AdList').datagrid('reload');
+												$('#AdList').datagrid(
+														'uncheckAll');
+												if (result != null) {
+													$.messager
+															.show({
+																title : 'Delete result',
+																msg : '投放成功',
+																timeout : 1000,
+																showType : 'slide'
+															});
+												}
+											}
+										})
+							}
+						}
+					});
+		}
+
 	}
 </script>
 </head>
@@ -262,15 +280,19 @@ $(function(){
 		</table>
 		<div id="tb" style="padding: 5px; height: auto">
 			<div style="margin-bottom: 5px">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="doAdd()"></a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editAd()"></a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
-				<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteAd()"></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add"
+					plain="true" onclick="doAdd()"></a> <a href="#"
+					class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+					onclick="editAd()"></a> <a href="#" class="easyui-linkbutton"
+					iconCls="icon-save" plain="true"></a> <a href="#"
+					class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+					onclick="deleteAd()"></a>
 			</div>
 			<div>
-				Date From: <input id="dateStart" class="easyui-datetimebox" style="width: 80px">
-				To: <input id="dateEnd" class="easyui-datetimebox" style="width: 80px">
-				Status: <select id="status" class="easyui-combobox" panelHeight="auto"
+				Date From: <input id="dateStart" class="easyui-datetimebox"
+					style="width: 80px"> To: <input id="dateEnd"
+					class="easyui-datetimebox" style="width: 80px"> Status: <select
+					id="status" class="easyui-combobox" panelHeight="auto"
 					style="width: 100px">
 					<option value="0">正常</option>
 					<option value="1">待审核</option>
@@ -279,10 +301,11 @@ $(function(){
 					<option value="4">设备已下架</option>
 					<option value="5">红外故障</option>
 					<option value="6">undefined</option>
-				</select>
-				DevName <input id="name" class="easyui-textbox"></input> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="doSearch()">Search</a>
-				<a href="#" class="easyui-linkbutton" iconCls="icon-text" onclick="doDeliver()">Ad Deliver</a>
+				</select> DevName <input id="name" class="easyui-textbox"></input> <a
+					href="#" class="easyui-linkbutton" iconCls="icon-search"
+					onclick="doSearch()">Search</a> <a href="#"
+					class="easyui-linkbutton" iconCls="icon-text" onclick="doDeliver()">Ad
+					Deliver</a>
 			</div>
 		</div>
 		<div id="addWindow" class="easyui-dialog" title="添加设备" closed="true"
@@ -291,51 +314,66 @@ $(function(){
 			<div style="padding-left: 100px; padding-top: 40px;">
 				<div style="float: center">
 					<form id='addForm' method="post">
-					<table>
-					   <tr>
-					   	<td>DevName:</td>
-					   	<td><input name="devName" class="easyui-textbox" type="text" data-options="required:true"/></td>
-					   	 <td>Type:</td>
-		 			     <td><input name="type" class="easyui-textbox" type="text" data-options="required:true"></td>	
-					   </tr>
-					   <tr>
-					      <td>DeployTime</td>
-  				      <td><input name="deployTime" type="text" class="easyui-datetimebox" required="required"></td>
-					     <td>Status</td>
- 				     <td><input name="status" class="easyui-textbox" type="text" data-options="required:true"></td>
-					   </tr>
-					   <tr>
-					      <td>Province:</td>
-					        <td><input class="easyui-combobox" name="province" data-options="valueField:'id',textField:'text',url:''" required="required">     
-					      </td>
-					      <td>City:</td>
-					   	 <td><input class="easyui-combobox" name="city" data-options="valueField:'id',textField:'text',url:''" required="required"></td>  
-					   </tr>
-					   <tr>
-					     <td>District:</td>
-					     <td><input class="easyui-combobox" name="district" data-options="valueField:'id',textField:'text',url:''" required="required"></td>
-					     <td>Street:</td>
-					     <td><input class="easyui-combobox" name="street" data-options="valueField:'id',textField:'text',url:''" required="required"></td>
-					   </tr>
-					   <tr>
-					   	  <td>Location:</td>
-					   	  <td><input name="location" class="easyui-textbox" type="text" data-options="required:true"/ data-options="required:true"></td>
-					   	  <td>AddressXY:</td>
-					   	  <td><input name="addressXY" class="easyui-textbox" type="text" data-options="required:true"/ data-options="required:true"></td>
-					   </tr>
-					</table>		  
+						<table>
+							<tr>
+								<td>DevName:</td>
+								<td><input name="devName" class="easyui-textbox"
+									type="text" data-options="required:true" /></td>
+								<td>Type:</td>
+								<td><input name="type" class="easyui-textbox" type="text"
+									data-options="required:true"></td>
+							</tr>
+							<tr>
+								<td>DeployTime</td>
+								<td><input name="deployTime" type="text"
+									class="easyui-datetimebox" required="required"></td>
+								<td>Status</td>
+								<td><input name="status" class="easyui-textbox" type="text"
+									data-options="required:true"></td>
+							</tr>
+							<tr>
+								<td>Province:</td>
+								<td><input class="easyui-combobox" name="province"
+									required="required"
+									data-options="">
+								</td>
+								<td>City:</td>
+								<td><input class="easyui-combobox" name="city" required="required"
+									data-options="valueField:'id',textField:'text',url:''">
+								</td>
+							</tr>
+							<tr>
+								<td>District:</td>
+								<td><input class="easyui-combobox" name="district"
+									data-options="valueField:'id',textField:'text',url:''"
+									required="required"></td>
+								<td>Street:</td>
+								<td><input class="easyui-combobox" name="street"
+									data-options="valueField:'id',textField:'text',url:''"
+									required="required"></td>
+							</tr>
+							<tr>
+								<td>Location:</td>
+								<td><input name="location" class="easyui-textbox"
+									type="text" data-options="required:true"
+									/ data-options="required:true"></td>
+								<td>AddressXY:</td>
+								<td><input name="addressXY" class="easyui-textbox"
+									type="text" data-options="required:true"
+									/ data-options="required:true"></td>
+							</tr>
+						</table>
 					</form>
 				</div>
 				<div style="clear: both"></div>
 			</div>
 			<div id="dlg-buttons" style="text-align: center;">
 				<a id="btnEp" class="easyui-linkbutton" iconCls="icon-ok"
-					onclick="submitForm()">确定</a>&nbsp;&nbsp; 
-				<a id="btnReset" class="easyui-linkbutton" icon="icon-redo"
-					onclick="clearForm()">重置</a>
+					onclick="submitForm()">确定</a>&nbsp;&nbsp; <a id="btnReset"
+					class="easyui-linkbutton" icon="icon-redo" onclick="clearForm()">重置</a>
 			</div>
 		</div>
-		
+
 	</div>
 </body>
 </html>

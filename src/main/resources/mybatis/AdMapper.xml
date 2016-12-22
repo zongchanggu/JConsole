@@ -55,7 +55,7 @@
 	<update id="updateAdStatus">
 		update advertise
 		<set>
-			Status=#{1}
+			Status=#{1}+1
 		</set>
 		where AdID =#{0}
 	</update>
