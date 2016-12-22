@@ -1,6 +1,8 @@
 package com.zjut.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,8 +41,7 @@ public class AdvertiseAction {
 	private DevToAdService devToAdServiceImpl;
 	@Resource
 	private UserToAdService userToAdServiceImpl;
-	
-	
+
 	@RequestMapping("getList")
 	public String getAdList() {
 		String viewName = "/adsPages/ad_list";
@@ -60,14 +61,21 @@ public class AdvertiseAction {
 	 */
 	@RequestMapping("getUserToAdsList")
 	@ResponseBody
-	public JsonDataInfo<Advertise> getUserToAdsList(int id,int page, int rows) {
+	public JsonDataInfo<Advertise> getUserToAdsList(int id, int page, int rows) {
 		JsonDataInfo<Advertise> adsJson = new JsonDataInfo<Advertise>();
 		Page p = new Page();
 		p.setStart((page - 1) * rows);
 		p.setEnd(page * rows);
 		p.setReserve(id);
 		List<UserToAd> utas = userToAdServiceImpl.getAdsByUserId(p);
-		List<Advertise> ads = utas.get(0).getAds();
+		List<Advertise> ads = new ArrayList<>();
+		if (utas != null && utas.size() != 0) {
+			Iterator<UserToAd> it = utas.iterator();
+			while (it.hasNext()) {
+				UserToAd tmp = it.next();
+				ads.addAll(tmp.getAds());
+			}
+		}
 		adsJson.setRows(ads);
 		int num = userToAdServiceImpl.getTotalNum(id);
 		adsJson.setTotal(num);
