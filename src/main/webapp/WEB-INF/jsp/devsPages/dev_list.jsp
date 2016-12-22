@@ -294,6 +294,7 @@
 					class="easyui-datetimebox" style="width: 80px"> Status: <select
 					id="status" class="easyui-combobox" panelHeight="auto"
 					style="width: 100px">
+					<option value="">设备状态</option>
 					<option value="0">正常</option>
 					<option value="1">待审核</option>
 					<option value="2">待投放</option>
