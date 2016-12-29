@@ -23,6 +23,8 @@ import com.zjut.DataFormat.RspDataInfo.RspData;
 import com.zjut.netty.server.NettyServerThread;
 import com.zjut.service.DevService;
 
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
@@ -71,7 +73,7 @@ public class ReqDataInfoHandler extends ChannelHandlerAdapter {
 			else
 				NettyServerThread.Devcounts.get(ad_id).getAndIncrement();
 			RspDataInfo.RspData rsp = buildRsp(req);
-			ctx.writeAndFlush(rsp);
+			ctx.writeAndFlush(rsp).addListener(ChannelFutureListener.CLOSE);
 		} 
 		logger.info("ad counts :" + NettyServerThread.Adcounts.get(1));
 	}

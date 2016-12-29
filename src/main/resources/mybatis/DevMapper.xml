@@ -87,7 +87,7 @@
 		<if test="startTime==null and endTime !=null">
 			and #{endTime} >=DeployTime
 		</if>
-		<if test="status!=null">
+		<if test="status!=null and status!=''">
 			and Status = #{status}
 		</if>
 		<if test="DevName!=null">

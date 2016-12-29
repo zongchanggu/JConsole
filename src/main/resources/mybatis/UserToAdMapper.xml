@@ -30,12 +30,18 @@
 
 	<select id="getAdsByUserId" resultMap="UserToAdResultMap"
 		parameterType="pageParam">
-		select u.UserID,u.UserName,ad.* from user u,usertoad ua,advertise ad
-		where u.UserID=#{reserve} and ua.AdID=ad.AdID
+		select distinct ad.* from usertoad ua,advertise ad
+		where
+		ua.UserID=#{reserve} and
+		ua.AdID=ad.AdID
 	</select>
-	
-	<select id="getTotalNum" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-		select count(*) from usertoad where UserID=#{userID}
+
+	<select id="getTotalNum" resultType="java.lang.Integer"
+		parameterType="java.lang.Integer">
+		select count(*) from usertoad ua,advertise ad
+		where
+		ua.UserID=#{reserve} and
+		ua.AdID=ad.AdID
 	</select>
 
 </mapper>

@@ -30,5 +30,6 @@
 		<mapper resource="mybatis/UserDevMapper.xml" />
 		<mapper resource="mybatis/DevToAdMapper.xml"/>
 		<mapper resource="mybatis/UserToAdMapper.xml"/>
+		<mapper resource="mybatis/CascadeMapper.xml"/>
 	</mappers>
 </configuration>
