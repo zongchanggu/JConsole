@@ -334,34 +334,63 @@
 							</tr>
 							<tr>
 								<td>Province:</td>
-								<td><input class="easyui-combobox" name="province"
+								<td><input id="pv" class="easyui-combobox" name="province"
 									required="required"
-									data-options="">
+									data-options="prompt:'省份',
+									   valueField: 'id',
+       								   textField: 'text',
+									   url:'${pageContext.request.contextPath}/cityCascade/getProvinceList.action',
+									   onSelect:function(rec){
+								    	  $('[comboname=city]').combobox('clear');
+								    	  $('[comboname=city]').combobox('reload', '${pageContext.request.contextPath}/cityCascade/getCityList.action?provinceName=' + rec.text);
+									   }">
 								</td>
 								<td>City:</td>
-								<td><input class="easyui-combobox" name="city" required="required"
-									data-options="valueField:'id',textField:'text',url:''">
-								</td>
+								<td><input class="easyui-combobox" name="city"
+									required="required"
+									data-options="prompt:'城市名称',
+									valueField:'id',
+									textField:'text',
+									onSelect:function(rec){
+									    var provinceName = $('[comboname=province]').combobox('getText');
+									    $('[comboname=district]').combobox('clear');
+									    $('[comboname=district]').combobox('reload','${pageContext.request.contextPath}/cityCascade/getDistrictList.action?provinceName='+provinceName+'&cityName='+rec.text);
+									     
+									}"></td>
 							</tr>
 							<tr>
 								<td>District:</td>
 								<td><input class="easyui-combobox" name="district"
-									data-options="valueField:'id',textField:'text',url:''"
-									required="required"></td>
+									required="required"
+									data-options="prompt:'区域',
+									valueField:'id',
+									textField:'text',
+									onSelect:function(rec){
+									    var provinceName = $('[comboname=province]').combobox('getText');
+									    var cityName = $('[comboname=city]').combobox('getText');
+									    $('[comboname=street]').combobox('clear');
+									    $('[comboname=street]').combobox('reload','${pageContext.request.contextPath}/cityCascade/getStreetList.action?district='+rec.text+'&provinceName='+provinceName+'&cityName='+cityName);    
+									}"></td>
 								<td>Street:</td>
 								<td><input class="easyui-combobox" name="street"
-									data-options="valueField:'id',textField:'text',url:''"
-									required="required"></td>
+									required="required"
+									data-options="prompt:'街道',
+									valueField:'id',textField:'text',
+									onSelect:function(rec){
+									    var provinceName = $('[comboname=province]').combobox('getText');
+									    var cityName = $('[comboname=city]').combobox('getText');
+									    var districtName =$(['comboname=district']).combobox('getText');
+									    $('[comboname=location]').combobox('clear');
+									    $('[comboname=location]').combobox('reload','${pageContext.request.contextPath}/cityCascade/getLocationList.action?streetName='+rec.text+'&provinceName='+provinceName+'&cityName='+cityName+'&districtName='+districtName);    
+									}"></td>
 							</tr>
 							<tr>
 								<td>Location:</td>
-								<td><input name="location" class="easyui-textbox"
-									type="text" data-options="required:true"
-									/ data-options="required:true"></td>
+								<td><input name="location" class="easyui-combobox"
+									type="text" data-options="required:true"></td>
 								<td>AddressXY:</td>
 								<td><input name="addressXY" class="easyui-textbox"
-									type="text" data-options="required:true"
-									/ data-options="required:true"></td>
+									type="text" data-options="required:true"></td>
 							</tr>
 						</table>
 					</form>
