@@ -27,6 +27,13 @@
 			$('#addWindow').window('close');
 		});
 	})
+	
+	function getProce(){
+		alert("ssss")
+			  var url='${pageContext.request.contextPath}/cityCascade/getProvinceList.action'
+			   $('#provinceInput').combobox('clear').combobox('reload',url);
+	}
+	
 	function operationFormat(val, row, index) {
 		return '<a href="javascript:getDevDetailInfo(' + row.devID
 				+ ')">查看</a>'
@@ -73,6 +80,17 @@
 	}
 
 	function doAdd() {
+		$('#provinceInput').combobox({
+			valueField:'id',
+			textField:'text',
+			url:'${pageContext.request.contextPath}/cityCascade/getProvinceList.action',
+			onClick:function(rec){
+	      		var url='${pageContext.request.contextPath}/cityCascade/getCityList.action?provinceName=' + rec.text;
+	    	  $('#cityInput').combobox('clear').combobox('reload',url);
+	    	  $('#districtInput').combobox('clear');
+	    	  $('#streetInput').combobox('clear');
+	    	  $('#locationInput').combobox('clear');
+		}});
 		$('#addWindow').window('open');
 	}
 	function editAd() {
@@ -333,61 +351,73 @@
 									data-options="required:true"></td>
 							</tr>
 							<tr>
-								<td>Province:</td>
-								<td><input id="pv" class="easyui-combobox" name="province"
-									required="required"
+								<!-- <td>Province:</td>
+								<td><input id="provinceInput" class="easyui-combobox" 
+									name="province" required="required" onfocus="function(){alert('ll')}"
 									data-options="prompt:'省份',
-									   valueField: 'id',
-       								   textField: 'text',
-									   url:'${pageContext.request.contextPath}/cityCascade/getProvinceList.action',
-									   onSelect:function(rec){
-								    	  $('[comboname=city]').combobox('clear');
-								    	  $('[comboname=city]').combobox('reload', '${pageContext.request.contextPath}/cityCascade/getCityList.action?provinceName=' + rec.text);
-									   }">
+										valueField:'id',
+										textField:'text',
+										onSelect:function(rec){
+								      var url='${pageContext.request.contextPath}/cityCascade/getCityList.action?provinceName=' + rec.text;
+							    	  $('#cityInput').combobox('clear').combobox('reload',url);
+							    	  $('#districtInput').combobox('clear');
+							    	  $('#streetInput').combobox('clear');
+							    	  $('#locationInput').combobox('clear');
+								   }
+									">
+								</td> -->
+								<td>Province:</td>
+								<td><input id="provinceInput" class="easyui-combobox" 
+									name="province" required="required" data-options="prompt:'省份'">
 								</td>
 								<td>City:</td>
-								<td><input class="easyui-combobox" name="city"
-									required="required"
+								<td><input class="easyui-combobox" id="cityInput"
+									name="city" required="required"
 									data-options="prompt:'城市名称',
 									valueField:'id',
 									textField:'text',
-									onSelect:function(rec){
-									    var provinceName = $('[comboname=province]').combobox('getText');
-									    $('[comboname=district]').combobox('clear');
-									    $('[comboname=district]').combobox('reload','${pageContext.request.contextPath}/cityCascade/getDistrictList.action?provinceName='+provinceName+'&cityName='+rec.text);
-									     
+									onClick:function(rec){
+									    var provinceName = $('#provinceInput').combobox('getText');
+									     var url ='${pageContext.request.contextPath}/cityCascade/getDistrictList.action?provinceName='+provinceName+'&cityName='+rec.text;
+									    $('#districtInput').combobox('clear').combobox('reload',url);
+									    $('#streetInput').combobox('clear');
+								    	$('#locationInput').combobox('clear');
 									}"></td>
 							</tr>
 							<tr>
 								<td>District:</td>
-								<td><input class="easyui-combobox" name="district"
-									required="required"
+								<td><input class="easyui-combobox" id="districtInput"
+									name="district" required="required"
 									data-options="prompt:'区域',
 									valueField:'id',
 									textField:'text',
-									onSelect:function(rec){
-									    var provinceName = $('[comboname=province]').combobox('getText');
-									    var cityName = $('[comboname=city]').combobox('getText');
-									    $('[comboname=street]').combobox('clear');
-									    $('[comboname=street]').combobox('reload','${pageContext.request.contextPath}/cityCascade/getStreetList.action?district='+rec.text+'&provinceName='+provinceName+'&cityName='+cityName);    
+									onClick:function(rec){
+									    var provinceName = $('#provinceInput').combobox('getText');
+									    var cityName = $('#cityInput').combobox('getText');
+									    var url='${pageContext.request.contextPath}/cityCascade/getStreetList.action?districtName='+rec.text+'&provinceName='+provinceName+'&cityName='+cityName;
+									    $('#streetInput').combobox('clear').combobox('reload',url);   
+									    $('#locationInput').combobox('clear');						    
 									}"></td>
 								<td>Street:</td>
-								<td><input class="easyui-combobox" name="street"
-									required="required"
+								<td><input class="easyui-combobox" id="streetInput"
+									name="street" required="required"
 									data-options="prompt:'街道',
 									valueField:'id',textField:'text',
-									onSelect:function(rec){
-									    var provinceName = $('[comboname=province]').combobox('getText');
-									    var cityName = $('[comboname=city]').combobox('getText');
-									    var districtName =$(['comboname=district']).combobox('getText');
-									    $('[comboname=location]').combobox('clear');
-									    $('[comboname=location]').combobox('reload','${pageContext.request.contextPath}/cityCascade/getLocationList.action?streetName='+rec.text+'&provinceName='+provinceName+'&cityName='+cityName+'&districtName='+districtName);    
+									onClick:function(rec){
+									    var provinceName = $('#provinceInput').combobox('getText');
+									    var cityName = $('#cityInput').combobox('getText');
+									    var districtName =$('#districtInput').combobox('getText');
+									    var url = '${pageContext.request.contextPath}/cityCascade/getLocationList.action?streetName='+rec.text+'&provinceName='+provinceName+'&cityName='+cityName+'&districtName='+districtName;
+									    $('#locationInput').combobox('clear').combobox('reload',url);    
 									}"></td>
 							</tr>
 							<tr>
 								<td>Location:</td>
-								<td><input name="location" class="easyui-combobox"
-									type="text" data-options="required:true"></td>
+								<td><input class="easyui-combobox" id="locationInput"
+									name="location" required="required"
+									data-options="promote:'详细位置',
+									valueField:'id',textField:'text'
+									"></td>
 								<td>AddressXY:</td>
 								<td><input name="addressXY" class="easyui-textbox"
 									type="text" data-options="required:true"></td>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjut.mapping.CascadeMapper">
+    <select id="getProvinceList" resultType="java.lang.String">
+         select distinct Province from device
+    </select>
+    
+    <select id="getCityList" parameterType="java.util.Map" resultType="java.lang.String">
+    	select distinct City from device 
+    	where 
+    	   Province = #{provinceName}
+    </select>
+    
+    <select id="getDistrictList" parameterType="java.util.Map" resultType="java.lang.String">
+          select distinct District from device
+          where
+            Province=#{provinceName} and City=#{cityName}
+    </select>
+    
+    <select id="getStreetList" parameterType="java.util.Map" resultType="java.lang.String">
+         select distinct Street from device
+         where
+         Province=#{provinceName} and City=#{cityName}and District=#{districtName}
+    </select>
+    
+    <select id="getLocationList" parameterType="java.util.Map" resultType="java.lang.String">
+       select distinct Location from device
+       where
+      Province=#{provinceName} and City=#{cityName}and District=#{districtName} and Street=#{streetName}
+     </select>
+    
+</mapper>

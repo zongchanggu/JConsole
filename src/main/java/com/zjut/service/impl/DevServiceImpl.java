@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Service;
 
 import com.zjut.mapping.DevMapper;
 import com.zjut.pojo.Advertise;
@@ -20,6 +21,7 @@ import com.zjut.service.DevService;
  * @description:created by gu
  * @date:2016年12月13日 下午11:10:28
  */
+@Service("devServiceImpl")
 public class DevServiceImpl implements DevService {
 	@Resource
 	private SqlSessionTemplate sessionTemplate;

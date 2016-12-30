@@ -1,6 +1,7 @@
 package com.zjut.pojo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -117,6 +118,8 @@ public class DevToAd implements Serializable {
 		return EndTime;
 	}
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public void setEndTime(Date endTime) {
 		EndTime = endTime;
 	}
@@ -131,7 +134,12 @@ public class DevToAd implements Serializable {
 
 	@Override
 	public String toString() {
-		return AdID + "," + AdType + "," + EndTime + "," + RealPath + "," + AdName;
+		return AdID + "," + AdType + "," + transfer(EndTime) + "," + RealPath + "," + AdName;
 	}
 
+	public String transfer(Date endTime) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String str = sdf.format(endTime);
+		return str;
+	}
 }
