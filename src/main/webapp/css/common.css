@@ -92,3 +92,18 @@ html {
 	border: 1px solid #D3D3D3;
 	border-radius: 3px 3px 3px 3px;
 }
+
+/*详情相关页面css，只所以单独放在这边，是为了防止pintuer.css和easyui的样式文件冲突导致
+  easyui组件显示不正常*/
+.basicinfo_container{
+	border-radius: 4px 4px 4px 4px; border: solid 1px #ddd; padding: 5px;
+}
+
+.basicinfo_rowstyle{
+	overflow: hidden;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 8px;
+}
+
+.

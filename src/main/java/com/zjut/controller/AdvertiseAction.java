@@ -48,15 +48,12 @@ public class AdvertiseAction {
 		return viewName;
 	}
 
+
 	/**
-	 * 得到分页的广告数据 alter by chenzq 12/21
-	 * 
+	 * created by zongchnaggu
+	 * @param id
 	 * @param page
 	 * @param rows
-	 * @param adName
-	 * @param dateStart
-	 * @param dateEnd
-	 * @param adtype
 	 * @return
 	 */
 	@RequestMapping("getUserToAdsList")
@@ -95,6 +92,39 @@ public class AdvertiseAction {
 		dtaJson.setRows(dtas);
 		dtaJson.setTotal(size);
 		return dtaJson;
+	}
+
+	/**
+	 * 得到分页的广告数据 created by chenzq 12/29
+	 * 
+	 * @param page
+	 * @param rows
+	 * @param adName
+	 * @param dateStart
+	 * @param dateEnd
+	 * @param adtype
+	 * @return
+	 */
+	@RequestMapping("getPageAdsList")
+	@ResponseBody
+	public JsonDataInfo<Advertise> getPageAdsList(int page, int rows, String adName, Date dateStart, Date dateEnd,
+			String adtype) {
+		JsonDataInfo<Advertise> adsJson = new JsonDataInfo<Advertise>();
+		Page p = new Page();
+		p.setStart((page - 1) * rows);
+		p.setEnd(page * rows);
+		List<Advertise> advertises;
+		if ((adName == null) && (dateStart == null) && (dateEnd == null) && (adtype == null)) {// 非搜索
+			advertises = adServiceImpl.getPageAdListByFL(p);
+			adsJson.setTotal(adServiceImpl.getTotalNum());
+			adsJson.setRows(advertises);
+		} else {// 点击广告页面上的搜索按钮进行搜索
+
+		}
+		// List<Advertise> ads = devServiceImpl.getAdByDevID(1);
+		// adsJson.setRows(ads);
+		// adsJson.setTotal(ads.size());
+		return adsJson;
 	}
 
 }

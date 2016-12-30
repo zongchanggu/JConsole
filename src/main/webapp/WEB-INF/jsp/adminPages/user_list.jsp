@@ -109,7 +109,7 @@
 					url : 'getUserDetail.action',
 					success : function(htm) {
 						mis_page.html(htm);
-						//query.parser.parse(mis_page);
+						query.parser.parse(mis_page);
 						query.messager.progress('close');
 						mis_page.dialog('open'); 
 					},
