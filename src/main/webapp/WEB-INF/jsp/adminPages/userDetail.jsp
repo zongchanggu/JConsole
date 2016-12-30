@@ -6,25 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户详情页</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/easyui/themes/gray/easyui.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/common.css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/formatterJs/common.js"></script>
+	
 </head>
 <body>
 	<div id="content" style="padding: 15px;">
 		<form action="">
-			<div id="userDetail"
-				style="border-radius: 4px 4px 4px 4px; border: solid 1px #ddd; padding: 5px;">
+			<div id="userDetail" class="basicinfo_container">
 				<div class="welcome-info">
 					<img
 						src="${pageContext.request.contextPath}/images/admin/personal-information.png">
@@ -59,19 +50,18 @@
 			</div>
 
 			<table id="userlist_tab" class="easyui-datagrid"
-				style="width: 100%; height: 220px;" rownumbers="true"
+				style="width: 100%;vertical-align: middle; height: 230px;" rownumbers="true"
 				pagination="true"
-				data-options="url:'${pageContext.request.contextPath}/AdsManage/getUserToAdsList.action?id='+${userDetail.userID},method:'get',striped: true">
+				data-options="nowrap:true, singleSelect:true, url:'${pageContext.request.contextPath}/AdsManage/getUserToAdsList.action?id='+${userDetail.userID},method:'get',striped: true">
 				<thead>
 					<tr>
-						<th field="adID" align="center" align="center">广告ID</th>
+						<th field="adID" align="center" hidden="true">广告ID</th>
 						<th field="adName" width="20%" align="center">广告名称</th>
 						<th field="startTime" width="20%" align="center"
 							data-options="">开始时间</th>
 						<th field="endTime" width="20%" align="center"
 							data-options="">结束时间</th>
 						<th field="realPath" width="20%" align="center">路径</th>
-						<th field="viewNum" width="5%" align="center">浏览数</th>
 						<th field="operator" width="20%" align="center"
 							formatter="javascript:operationFormat">操作</th>
 					</tr>

@@ -16,16 +16,16 @@
 		<!-- <result column="Status" property="Status" /> -->
 		<association property="Type" javaType="adType">
 			<id property="adTypeID" column="AdTypeID"></id>
-			<result property="comment" column="Comment"></result>
+			<result property="comment" column="ADTYPE"></result>
 		</association>
 		<association property="Status" javaType="adStatus">
 			<id property="adStatusID" column="StatusID"></id>
-			<result property="comment" column="Comment"></result>
+			<result property="comment" column="ADSTATUS"></result>
 		</association>
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		AdID, AdName, adtype.Comment, adstatus.Comment, StartTime, EndTime, UploadPath, ResieterTime, ViewNum
+		AdID, AdName, adtype.Comment as ADTYPE, adstatus.Comment as ADSTATUS, StartTime, EndTime, UploadPath, ResieterTime, ViewNum
 	</sql>
 	
 	<select id="getPageAdListByFL" resultMap="AdResultMap"

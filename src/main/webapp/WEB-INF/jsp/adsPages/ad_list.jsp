@@ -30,7 +30,7 @@
 		<table id="adList_tab" class="easyui-datagrid"
 			style="width: 100%; height: 88%;" toolbar="#tb" rownumbers="true"
 			pagination="true"
-			data-options="emptyMsg: '无记录',singleSelect:true,url:'getAdsList.action',method:'get',striped: true,">
+			data-options="emptyMsg: '无记录',singleSelect:true,url:'getPageAdsList.action',method:'get',striped: true,">
 			<thead>
 				<tr>
 					<th field="adID" align="center" hidden="true">AdID</th>

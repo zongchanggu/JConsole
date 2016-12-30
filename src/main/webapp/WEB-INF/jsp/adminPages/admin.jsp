@@ -12,7 +12,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/admin.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css" />
+	href="${pageContext.request.contextPath}/easyui/themes/gray/easyui.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
 <link rel="stylesheet"
