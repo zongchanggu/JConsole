@@ -46,14 +46,16 @@ public class UserServiceImpl implements IUserService{
 	}
 	@Override
 	public List<User> searchPageUserList(int firstrow, int lastrow, String username, String phone, String usertype) {
-		System.out.println("username:" + username);
-		System.out.println("phone:" + phone);
-		System.out.println(phone=="");
-		System.out.println("usertype:" + usertype);
 		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
 		List<User> result = userMapper.searchPageUserList(firstrow, lastrow, username, phone, usertype);
 		return result;
 	}
-	
+
+	@Override
+	public User getUserInfoByAdID(int id) {
+		UserMapper userMapper = sessionTemplate.getMapper(UserMapper.class);
+		User result = userMapper.getUserInfoByAdID(id);
+		return result;
+	}
 
 }

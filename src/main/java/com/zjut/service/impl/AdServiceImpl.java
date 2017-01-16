@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.zjut.mapping.AdMapper;
 import com.zjut.mapping.DevToAdMapper;
+import com.zjut.pojo.AdSearchParam;
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.AdvertiseForDetail;
 import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Page;
 import com.zjut.service.AdService;
@@ -58,6 +60,20 @@ public class AdServiceImpl implements AdService {
 		DevToAdMapper mapper = sessionTemplate.getMapper(DevToAdMapper.class);
 		List<DevToAd> dtas = mapper.getAdsByDevID(p);
 		return dtas;
+	}
+
+	@Override
+	public List<Advertise> searchPageAdList(AdSearchParam param) {
+		AdMapper mapper = sessionTemplate.getMapper(AdMapper.class);
+		List<Advertise> result = mapper.searchPageAdList(param);
+		return result;
+	}
+
+	@Override
+	public AdvertiseForDetail getAdInfoByAdId(int id) {
+		AdMapper mapper = sessionTemplate.getMapper(AdMapper.class);
+		AdvertiseForDetail result = mapper.getAdInfoByAdId(id);
+		return result;
 	}
 
 }

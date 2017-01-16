@@ -59,7 +59,7 @@
 				</div>
 				&nbsp; <a class="btn btn-sm btn-default" href="#" role="button"
 					onclick="doSearch()"
-					style="vertical-align: middle; height: inherit;">搜&nbsp;索</a>
+					style="vertical-align: middle; height: 32px;">搜&nbsp;索</a>
 
 			</div>
 		</div>

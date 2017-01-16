@@ -23,6 +23,31 @@
 			<result property="comment" column="ADSTATUS"></result>
 		</association>
 	</resultMap>
+	
+	<resultMap type="com.zjut.pojo.AdvertiseForDetail" id="AdDetailResultMap">
+		<id column="AdID" property="AdID" />
+		<!-- <result column="Type" property="Type" /> -->
+		<result column="ResieterTime" property="ResieterTime" />
+		<result column="StartTime" property="StartTime" />
+		<result column="EndTime" property="EndTime" />
+		<result column="Duration" property="Duration" />
+		<result column="CurrentTime" property="CurrentTime" />
+		<result column="UploadPath" property="UploadPath" />
+		<result column="RealPath" property="RealPath" />
+		<result column="AdName" property="AdName" />
+		<result column="ViewNum" property="ViewNum" />
+		<result column="Description" property="description" />
+		<result column="theme" property="comment" />
+		<!-- <result column="Status" property="Status" /> -->
+		<association property="Type" javaType="adType">
+			<id property="adTypeID" column="AdTypeID"></id>
+			<result property="comment" column="ADTYPE"></result>
+		</association>
+		<association property="Status" javaType="adStatus">
+			<id property="adStatusID" column="StatusID"></id>
+			<result property="comment" column="ADSTATUS"></result>
+		</association>
+	</resultMap>
 
 	<sql id="Base_Column_List">
 		AdID, AdName, adtype.Comment as ADTYPE, adstatus.Comment as ADSTATUS, StartTime, EndTime, UploadPath, ResieterTime, ViewNum
@@ -35,6 +60,37 @@
 		from advertise, adtype, adstatus
 		where advertise.Type=adtype.AdTypeID and advertise.Status=adstatus.StatusID 
 		limit #{start},#{end}
+	</select>
+	
+	<select id="searchPageAdList" resultMap="AdResultMap"
+		parameterType="adSearchParam">
+		select
+		<include refid="Base_Column_List" />
+		from advertise, adtype, adstatus
+		where advertise.Type=adtype.AdTypeID and advertise.Status=adstatus.StatusID and 1=1
+		<if test='adName!=null and adName !=""'>
+	          and AdName like CONCAT('%',#{adName},'%')
+	     </if>
+	     <if test='dateStart!=null and dateEnd!=null'>
+	          and StartTime between #{dateStart} and #{dateEnd} and EndTime between #{dateStart} and #{dateEnd}
+	     </if>
+	     <if test='dateStart!=null and dateEnd==null'>
+	     	  and StartTime between #{dateStart} and NOW()
+	     </if>
+	     <if test='dateStart==null and dateEnd!=null'>
+	     	  and #{dateEnd} >= EndTime
+	     </if>
+	     <if test=' adType!=null and adType !=""'>
+	          and adtype.Comment = #{adType}
+	     </if>
+		limit #{pageParams.start},#{pageParams.end}
+	</select>
+	
+	<select id="getAdInfoByAdId" resultMap="AdDetailResultMap"
+		parameterType="java.lang.Integer">
+		select advertise.AdID, AdName, adtype.Comment as ADTYPE, adstatus.Comment as ADSTATUS, StartTime, EndTime, UploadPath, RealPath, ResieterTime, CurrentTime, ViewNum, Description, advertise.Comment as theme
+		from advertise, adtype, adstatus, usertoad
+		where usertoad.AdID = #{0} and usertoad.AdID = advertise.AdID and advertise.Type=adtype.AdTypeID and advertise.Status=adstatus.StatusID
 	</select>
 	
 	<select id="getTotalNum" resultType="java.lang.Integer">

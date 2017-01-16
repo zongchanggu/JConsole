@@ -22,6 +22,7 @@
 		<typeAlias type="com.zjut.pojo.UserType" alias="userType"/>
 		<typeAlias type="com.zjut.pojo.AdType" alias="adType"/>
 		<typeAlias type="com.zjut.pojo.AdStatus" alias="adStatus"/>
+		<typeAlias type="com.zjut.pojo.AdSearchParam" alias="adSearchParam"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/UserMapper.xml" />
