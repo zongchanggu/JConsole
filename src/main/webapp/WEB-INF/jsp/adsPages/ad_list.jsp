@@ -30,7 +30,7 @@
 		<table id="adList_tab" class="easyui-datagrid"
 			style="width: 100%; height: 88%;" toolbar="#tb" rownumbers="true"
 			pagination="true"
-			data-options="emptyMsg: '无记录',singleSelect:true,url:'getPageAdsList.action',method:'get',striped: true,">
+			data-options="emptyMsg: '无记录',singleSelect:true,url:'getPageAdsList.action',method:'post',striped: true,">
 			<thead>
 				<tr>
 					<th field="adID" align="center" hidden="true">AdID</th>
@@ -78,8 +78,8 @@
 						style="height: 30px; vertical-align: middle;">
 						<option value="">--广告类型--</option>
 						<option value="图片">图片广告</option>
-						<option value="视频">多图广告</option>
-						<option value="文本">视频广告</option>
+						<option value="视频">视频广告</option>
+						<option value="文本">文本广告</option>
 					</select>
 				</div>
 				&nbsp; <a class="btn btn-sm btn-default" href="#" role="button"
@@ -107,21 +107,21 @@
 						+ ')">查看</a>'
 			};
 
-			function getUserInfo(id) {
+			function getAdInfo(id) {
 				var query = parent.$;
-				var userDetail_dlg = query('#userDetail_dlg');
-				if (userDetail_dlg.length == 0) {
-					query('<div id="userDetail_dlg"></div>').appendTo("body");
+				var adDetail_dlg = query('#adDetail_dlg');
+				if (adDetail_dlg.length == 0) {
+					query('<div id="adDetail_dlg"></div>').appendTo("body");
 				}
-				var mis_page = query('#userDetail_dlg');
+				var mis_page = query('#adDetail_dlg');
 				mis_page.dialog({
 					shadow : true,
 					closed : true,
-					maximizable : true,
+					maximizable : false,
 					collapsible : false,
-					title : '用户详情',
-					width : '70%',
-					height : 520,
+					title : '广告详情',
+					width : '75%',
+					height : 600,
 					modal : true,
 					show : 'slide',
 				});
@@ -134,7 +134,7 @@
 					data : {
 						id : id
 					},
-					url : 'getUserDetail.action',
+					url : '${pageContext.request.contextPath}/AdsManage/getAdDetail.action',
 					success : function(htm) {
 						mis_page.html(htm);
 						query.parser.parse(mis_page);

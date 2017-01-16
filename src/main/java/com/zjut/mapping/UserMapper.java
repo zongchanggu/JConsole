@@ -19,4 +19,6 @@ public interface UserMapper {
 	public int getTotalNum();
 	
 	public List<User> searchPageUserList(int firstrow, int lastrow, String username, String phone, String usertype);
+	
+	public User getUserInfoByAdID(int id);
 }

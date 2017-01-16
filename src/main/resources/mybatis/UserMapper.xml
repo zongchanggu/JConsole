@@ -62,4 +62,11 @@
 		limit #{0}, #{1}
 	</select>
 	
+	<select id="getUserInfoByAdID" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select user.UserID, user.UserName, Phone, Comment
+		from user, usertype, usertoad
+		where usertoad.AdID = #{0} and usertoad.UserID = user.UserID and user.Type=usertype.TypeID
+	</select>
+	
 </mapper>

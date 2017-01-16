@@ -8,6 +8,10 @@ a, img {
 	border: 0;
 }
 
+ul{
+	padding-left: 0px;
+}
+
 .banner {
 	width: 100%;
 	overflow: hidden;

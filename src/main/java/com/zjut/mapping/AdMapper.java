@@ -2,7 +2,9 @@ package com.zjut.mapping;
 
 import java.util.List;
 
+import com.zjut.pojo.AdSearchParam;
 import com.zjut.pojo.Advertise;
+import com.zjut.pojo.AdvertiseForDetail;
 import com.zjut.pojo.DevToAd;
 import com.zjut.pojo.Page;
 
@@ -22,4 +24,7 @@ public interface AdMapper {
 	
 	public int getTotalNum();
 
+	public List<Advertise> searchPageAdList(AdSearchParam param);
+	
+	public AdvertiseForDetail getAdInfoByAdId(int id);
 }
